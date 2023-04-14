@@ -1,3 +1,4 @@
+import { BadRequestError } from "../domain/errors/bad-request-error";
 import { QueryRepository } from "../domain/query.repository";
 import { QueryValue } from "../domain/query.value";
 
@@ -17,6 +18,8 @@ export class GetUseCase {
 
   public  getScoreById = async (id:string) => {
     const query = await this._queryRepository.getScoreById(id)
-    return query
+    if(query) return query
+    throw new BadRequestError('Dont exist user, try with other ID')
+
   }
 }

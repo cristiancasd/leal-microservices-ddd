@@ -4,7 +4,7 @@ import { MockRepository } from "../repository/mock.repository";
 import { QueryController } from "../controller/query.ctrl";
 import { GetUseCase } from "../../application/getUseCase";
 import { UpdateUseCase } from "../../application/updateUseCase";
-import { body } from 'express-validator';
+import { body,check} from 'express-validator';
 import { validateRequest } from "../middlewares/validate-request";
 
 
@@ -24,19 +24,22 @@ route.put(`/query/add`, [
         body('name').isString().withMessage('name must be String'),
         body('score').isNumeric().withMessage('score must be number'),
 ],  validateRequest,
-
-
-
-
 addCtrl.addPoints)
 
 
+route.put(`/query/redeem`, [
+        body('id').isUUID().withMessage('id must be UUID'),
+        body('documentCc').isNumeric().withMessage('documentCc must be number'),
+        body('name').isString().withMessage('name must be String'),
+        body('score').isNumeric().withMessage('score must be number'),
+],  validateRequest,
+addCtrl.redeemPoints)
 
 
-route.put(`/query/redeem`, addCtrl.redeemPoints)
-
-
-route.get(`/query/getbyid/:id`, addCtrl.getScoreById)
+route.get(`/query/getbyid/:id`, [
+    check('id', 'id must be UUID').isUUID(),
+],  validateRequest,
+addCtrl.getScoreById)
 
 
 

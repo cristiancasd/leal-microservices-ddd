@@ -8,9 +8,9 @@ export const errorHandler = (
   next: NextFunction 
 ) => {
 
-    console.log('estoy en error handler')
+    //console.log('estoy en error handler')
   if (err instanceof CustomError) {
-    console.log(err);
+    //console.log(err);
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
 

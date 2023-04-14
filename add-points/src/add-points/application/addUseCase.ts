@@ -5,7 +5,7 @@ import { AddValue } from "../domain/add.value";
 interface addInput {
   documentCc:number
   name: string
-  points: number
+  points: number 
   detail: string
 }
 

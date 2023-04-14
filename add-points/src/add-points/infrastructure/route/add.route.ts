@@ -10,15 +10,16 @@ import { body } from 'express-validator';
 
 //const route = Router()
 const route = express.Router()
-const addRepo = new DynamoRepository()   // To use db Dynamo
 //const addRepo = new MockRepository()   // To use db Mock
+
+const addRepo = new DynamoRepository()   // To use db Dynamo
 
 
 const addUseCase = new AddUseCase(addRepo)
 const addCtrl = new AddController(addUseCase)
 
 
-route.post(`/add/create`, [
+route.post(`/api/add/create`, [
   //body('id').isUUID().withMessage('id must be UUID'),
   body('documentCc').isNumeric().withMessage('documentCc must be number'),
   body('name').isString().withMessage('name must be String'),

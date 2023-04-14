@@ -1,3 +1,4 @@
+import { BadRequestError } from "../domain/errors/bad-request-error";
 import { QueryRepository } from "../domain/query.repository";
 import { QueryValue } from "../domain/query.value";
 
@@ -34,7 +35,7 @@ export class UpdateUseCase {
       const scoreCreated = await this._queryRepository.updatePoints(inputValue);
       return scoreCreated
       }else{
-        return null
+        throw new BadRequestError('sorry, you dont have enough points')
       }
   }
 }

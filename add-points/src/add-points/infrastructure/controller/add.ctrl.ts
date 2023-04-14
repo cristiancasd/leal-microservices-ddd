@@ -8,7 +8,7 @@ export class AddController {
 
   public async insertCtrl({ body }: Request, res: Response) {
     const pointsAdded = await this.addUseCase.createAdd(body);
-    res.send( pointsAdded);
+    res.status(201).send( pointsAdded);
   }
 }
 
