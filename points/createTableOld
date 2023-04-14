@@ -1,0 +1,40 @@
+/*import { DynamoDBClient, CreateTableCommand, CreateTableCommandInput } from "@aws-sdk/client-dynamodb";
+import "dotenv/config";
+
+
+
+const client = new DynamoDBClient({ 
+    region: "us-east-1",
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID||'',
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY||''
+      }
+ });
+
+const input: CreateTableCommandInput = {
+    TableName : "Movies",
+    KeySchema: [       
+        { AttributeName: "year", KeyType: "HASH"},    //Partition key
+        { AttributeName: "title", KeyType: "RANGE" }  //Sort key
+    ],
+    AttributeDefinitions: [       
+        { AttributeName: "year", AttributeType: "N" },
+        { AttributeName: "title", AttributeType: "S" }
+    ],
+    ProvisionedThroughput: {       
+        ReadCapacityUnits: 10, 
+        WriteCapacityUnits: 100
+    }
+};
+
+const run = async function () {
+    try {
+        console.log('voy a intentar')
+        const results = await client.send(new CreateTableCommand(input));
+        console.log(results)
+    } catch(err) {
+        console.error(err)
+    }
+};
+
+run();*/
