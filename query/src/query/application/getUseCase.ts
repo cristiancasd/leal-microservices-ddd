@@ -15,9 +15,8 @@ export class GetUseCase {
   }
 
 
-  public  getScoreById = async (documentCc:string) => {
-    console.log('estoy en query use case ', documentCc)
-    const query = await this._queryRepository.getScoreById(documentCc)
+  public  getScoreById = async (id:string) => {
+    const query = await this._queryRepository.getScoreById(id)
     return query
   }
 }

@@ -1,18 +1,14 @@
 
 import { QueryEntity } from '../../domain/query.entity';
 import { QueryRepository } from "../../domain/query.repository";
-import { QueryValue } from '../../domain/query.value';
 import { DynamoDB } from "../db/dynamo-db";
 
 export class DynamoRepository implements QueryRepository {
     
     private readonly _db = DynamoDB.getInstance()
 
-    async addPoints (query: QueryEntity): Promise<QueryEntity> {
+    async updatePoints (query: QueryEntity): Promise<QueryEntity> {
         
-
-      console.log('estoy en createAdd de dynamo repositorio ', query, {TableName: DynamoDB.TABLE_NAME})
-
 
       await this._db.putItem({
           TableName: DynamoDB.TABLE_NAME,
@@ -37,21 +33,21 @@ export class DynamoRepository implements QueryRepository {
           }
         }).promise()
         
-        console.log('estoy esperando termine la promesa')
         return query
       }
 
-    async getScoreById (documentCc: string): Promise<any|null> {
-      console.log('estoy en repositorio ', documentCc)
+    async getScoreById (id: string): Promise<any|null> {
 
+      console.log('buscando ...', id)
       const response = await this._db.getItem({
         TableName: DynamoDB.TABLE_NAME,
         Key: {
-          'documentCc': {N: documentCc}
+          "id": {S: id}
         },
        // ProjectionExpression: 'documentCc'
       }).promise()
 
+      console.log('response ',response)
        const item =(response.Item)
 
       if (item === undefined ) return null

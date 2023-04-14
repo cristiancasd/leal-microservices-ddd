@@ -1,53 +1,29 @@
 
 
 import "dotenv/config";
+import 'express-async-errors';
+
 import express from "express";
 import cors from "express";
 import queryRoute from "./query/infrastructure/route/query.route";
+
+import { NotFoundError } from "./query/domain/errors/not-found-error";
+import { errorHandler } from "./query/infrastructure/middlewares/error-handler";
 
 const app = express();
 app.use(cors()); 
 app.use(express.json()); 
 app.use(queryRoute);
 
-
-
-/*import express from 'express';
-import 'express-async-errors';
-import { json } from 'body-parser';
-import cookieSession from 'cookie-session';
-import { currentUserRouter } from './routes/current-user';
-import { signinRouter } from './routes/signin';
-import { signoutRouter } from './routes/signout';
-import { signupRouter } from './routes/signup';
-import { errorHandler, NotFoundError } from '@casd-ticketing/common';
-//import { errorHandler, NotFoundError } from '@casd-ticketing/common';
-
-//import { errorHandler } from './middlewares/error-handler';
-//import { NotFoundError } from './errors/not-found-error';
-
-const app = express();
-app.set('trust proxy', true);
-app.use(json());
-app.use( 
-  cookieSession({
-    signed: false,
-    //secure: process.env.NODE_ENV !== 'test'
-    secure: false
-  })
-);
-
-app.use(currentUserRouter);
-app.use(signinRouter);
-app.use(signoutRouter);
-app.use(signupRouter);
-
 app.all('*', async (req, res) => {
-  throw new NotFoundError();
+  //throw new Error();
+  res.status(404).json({
+    message:`Page no found`
+})
 });
 
 app.use(errorHandler);
-*/
+
 export {app}
 
 

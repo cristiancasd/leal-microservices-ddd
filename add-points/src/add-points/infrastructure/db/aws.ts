@@ -1,7 +1,6 @@
-
 import "dotenv/config";
-
 import AWS from 'aws-sdk'
+
 AWS.config.update({
     region: process.env.AWS_DEFAULT_REGION||'us-east-1',
     credentials: {

@@ -1,30 +1,24 @@
 
-/**
- * MOCK!
- */
-
 import { QueryEntity } from "../../domain/query.entity";
 import { QueryRepository } from "../../domain/query.repository";
 
 const MOCK_SCORE = {
-    id:'sdasdada',
+    id:'cualquierId',
     documentCc: 4541,
-    name: "Leifer",
+    name: "cualquier nombre",
     score: 23,
   };
 
 export class MockRepository implements QueryRepository {
  
-  async addPoints(scoreIn: QueryEntity): Promise<any> {
-    const user = MOCK_SCORE
-    return user
+  async updatePoints(scoreIn: QueryEntity): Promise<any> {
+    const res = MOCK_SCORE
+    return res
   }
   
 
-
-  async getScoreById(documentCc: String): Promise<QueryEntity> {
+  async getScoreById(id: String): Promise<QueryEntity> {
     const user = MOCK_SCORE
     return user;
   }
-
 }
