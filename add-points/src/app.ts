@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import 'express-async-errors';
 import express from 'express';
-import cors from 'express';
+import cors from 'cors';
 import { NotFoundError } from './add-points/domain/errors/not-found-error';
 import { errorHandler } from './add-points/infrastructure/middlewares/error-handler';
 import addRoute from './add-points/infrastructure/route/add.route';

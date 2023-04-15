@@ -16,7 +16,6 @@ const dataErr = {
   points: '55lf4', //points must be number
   de: 'fsdf', //body must have "detail"
   idUser: 455455 // idUser, must be UUID
-
 };
 
 describe('CREATE ADD-POINTS - POST /add/create', () => {

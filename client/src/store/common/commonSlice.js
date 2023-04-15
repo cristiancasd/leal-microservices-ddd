@@ -1,24 +1,50 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-export const commonSlice = createSlice({ 
-    name: 'common', 
-    initialState:{ 
-        colorTheme:'black'
-    }, 
+export const commonSlice = createSlice({
+  name: 'common',
+  initialState: {
+    colorTheme: 'black',
+    currentProcess: 'My Points',
+    errorMessage: undefined,
+    successMessage: undefined,
+    isCommunicating: false,
+  },
 
-    reducers: { 
-        setColorTheme: (state,{payload}) => { 
-            state.colorTheme=payload; 
-        },  
-       
-    }, 
-}) 
-    
+  reducers: {
+    setIsCommunicating: (state, { payload }) => {
+      state.isCommunicating = payload;
+    },
+
+    setColorTheme: (state, { payload }) => {
+      state.colorTheme = payload;
+    },
+    setCurrentProcess: (state, { payload }) => {
+      state.currentProcess = payload;
+    },
+    setErrorMessage: (state, { payload }) => {
+      state.errorMessage = payload;
+    },
+    setSuccessMessage: (state, { payload }) => {
+      state.successMessage = payload;
+    },
+    clearErrorMessage: (state, { payload }) => {
+      state.errorMessage = undefined;
+    },
+    clearSuccessMessage: (state, { payload }) => {
+      state.successMessage = undefined;
+    },
+  },
+});
+
 // Action creators are generated for each case reducer function
-export const { 
- 
+export const {
+  setColorTheme,
+  setCurrentProcess,
+  setErrorMessage,
+  setSuccessMessage,
 
-    setColorTheme,
+  clearErrorMessage,
+  clearSuccessMessage,
 
-
-} = commonSlice.actions
+  setIsCommunicating,
+} = commonSlice.actions;

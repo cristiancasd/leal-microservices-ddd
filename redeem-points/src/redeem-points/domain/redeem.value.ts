@@ -7,22 +7,26 @@ export class RedeemValue implements RedeemEntity {
   name: string;
   points: number;
   detail: string;
+  idUser: string;
 
   constructor({
     documentCc,
     points,
     name,
-    detail
+    detail,
+    idUser
   }: {
     documentCc: number;
     points: number;
     name: string;
     detail: string;
+    idUser: string;
   }) {
     this.id = uuid();
     this.documentCc = documentCc;
     this.name = name;
     this.points = points;
     this.detail = detail;
+    this.idUser = idUser;
   }
 }

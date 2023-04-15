@@ -42,8 +42,11 @@ route.put(
 );
 
 route.get(
-  `/api/query/getbyid/:id`,
-  [check('id', 'id must be UUID').isUUID()],
+  `/api/query/getbyid/:documentCc`,
+  [
+    check('documentCc', 'documentCc must be number').isNumeric()
+    //check('id', 'id must be UUID').isUUID()
+  ],
   validateRequest,
   addCtrl.getScoreById
 );

@@ -7,8 +7,7 @@ const MOCK_SCORE = {
   name: 'cualquier nombre',
   points: 23,
   detail: 'información de valor de los puntos',
-  idUser: 'cualquierUUID',
-
+  idUser: 'cualquierUUID'
 };
 
 export class MockRepository implements AddRepository {

@@ -17,7 +17,9 @@ export class UpdateUseCase {
 
   public addPoints = async (input: scoreInput) => {
     let inputValue = new QueryValue(input);
-    const query = await this._queryRepository.getScoreById(inputValue.id);
+    const query = await this._queryRepository.getScoreById(
+      inputValue.documentCc
+    );
     if (query) {
       inputValue.score = +inputValue.score + +query.score;
     }
@@ -28,7 +30,9 @@ export class UpdateUseCase {
 
   public redeemPoints = async (input: scoreInput) => {
     let inputValue = new QueryValue(input);
-    const query = await this._queryRepository.getScoreById(inputValue.id);
+    const query = await this._queryRepository.getScoreById(
+      inputValue.documentCc
+    );
 
     if (query && +query.score >= inputValue.score) {
       inputValue.score = +query.score - inputValue.score;

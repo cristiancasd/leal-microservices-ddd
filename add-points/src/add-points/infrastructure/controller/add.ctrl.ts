@@ -8,8 +8,6 @@ export class AddController {
   }
 
   public async insertCtrl({ body }: Request, res: Response) {
-
-
     const pointsAdded = await this.addUseCase.createAdd(body);
 
     //console.log('axios message :')
@@ -24,9 +22,7 @@ export class AddController {
     }catch(err){
       console.log('err with axios', err);
     }*/
-    
-
 
     res.status(201).send(pointsAdded);
   }
-} 
+}

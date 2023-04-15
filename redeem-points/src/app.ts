@@ -2,7 +2,7 @@ import 'dotenv/config';
 import 'express-async-errors';
 
 import express from 'express';
-import cors from 'express';
+import cors from 'cors';
 import { NotFoundError } from './redeem-points/domain/errors/not-found-error';
 import { errorHandler } from './redeem-points/infrastructure/middlewares/error-handler';
 

@@ -9,7 +9,6 @@ export class AddValue implements AddEntity {
   detail: string;
   idUser: string;
 
-
   constructor({
     documentCc,
     points,
@@ -29,6 +28,5 @@ export class AddValue implements AddEntity {
     this.points = points;
     this.detail = detail;
     this.idUser = idUser;
-
   }
 }

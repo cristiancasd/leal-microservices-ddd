@@ -20,6 +20,5 @@ describe('UNIT addUseCase -> Post ', () => {
     expect(res?.points).toEqual(data.points);
     expect(res?.detail).toEqual(data.detail);
     expect(res?.idUser).toEqual(data.idUser);
-
   });
 });

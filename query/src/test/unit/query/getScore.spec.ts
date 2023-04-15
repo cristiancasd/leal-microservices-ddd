@@ -19,16 +19,16 @@ describe('UNIT queryUseCase -> GET Score ', () => {
   it('should get current score of Mock Test Db', async () => {
     const repo = new MockTestRepository(); // To use db Mock
     const getUseCase = new GetUseCase(repo);
-    const res = await getUseCase.getScoreById(data.id);
+    const res = await getUseCase.getScoreById(data.documentCc);
     expect(res?.score).toBeDefined();
     expect(res?.score).toEqual(100); //100 base mock, 40 added
   });
 
-  it('should get Error when ID dont exist in MockTest DB', async () => {
+  it('should get Error when CC dont exist in MockTest DB', async () => {
     const repo = new MockTestRepository(); // To use db Mock
     const getUseCase = new GetUseCase(repo);
     try {
-      const res = await getUseCase.getScoreById('cualquiercosa');
+      const res = await getUseCase.getScoreById(7845154);
     } catch (err) {
       expect(err instanceof Error).toBe(true); //expect(res?.score).toEqual(60) //100 base mock, 40 added
     }

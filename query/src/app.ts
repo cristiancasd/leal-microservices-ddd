@@ -2,7 +2,7 @@ import 'dotenv/config';
 import 'express-async-errors';
 
 import express from 'express';
-import cors from 'express';
+import cors from 'cors';
 import queryRoute from './query/infrastructure/route/query.route';
 
 import { NotFoundError } from './query/domain/errors/not-found-error';

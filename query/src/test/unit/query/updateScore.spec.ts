@@ -28,7 +28,7 @@ describe('UNIT queryUseCase -> Post - Add Points ', () => {
   it('should create score if dont exist previus one', async () => {
     const repo = new MockTestRepository(); // To use db Mock
     const updateUseCase = new UpdateUseCase(repo);
-    const res = await updateUseCase.addPoints({ ...data, id: 'nuevoID' });
+    const res = await updateUseCase.addPoints({ ...data, documentCc: 785 });
     expect(res?.score).toBeDefined();
     expect(res?.score).toEqual(40);
   });

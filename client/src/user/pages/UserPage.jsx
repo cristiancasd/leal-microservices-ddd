@@ -1,36 +1,39 @@
-/*import { useDispatch, useSelector } from 'react-redux'
-import {Link as routerLink} from 'react-router-dom'
-import { Button, Grid, Link, TextField, Typography } from "@mui/material"
-import { AuthLayout } from '../layout/AuthLayout'
-import { useForm } from '../../hooks/useForm'
-import {  startLogin, startUpdateUser } from '../../store/auth/thunks'
-import { useEffect, useMemo, useState } from 'react'
- 
-import Swal from 'sweetalert2'
+import { Button, Container, Grid, TextField } from '@mui/material';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
+import { ButtonsProcess } from '../components/ButtomsProcess';
+import { UserLayout } from '../layout/UserLayout';
+import { AddPointsView } from '../views/AddPointsView';
+import { GetScoreView } from '../views/GetScoreView';
+import { RedeemPointsView } from '../views/RedeemPointsView';
 
-import { CheckingAuth } from '../../ui/components/CheckingAuth'
-import { EditMyData } from '../components/EditMyData'
-import { setProspectToEdit } from '../../store/auth/authSlice'
-*/
-
-import { Button, Grid, TextField } from "@mui/material"
-import { UserLayout } from "../layout/UserLayout"
-
-
-const loginFormFields={
-  documentCc: '',
-}
 
 export const UserPage = () => {
+  const { errorMessage, successMessage } = useSelector((state) => state.common);
 
+  console.log('estoy en user page');
+  const { currentProcess } = useSelector((state) => state.common);
 
+  useEffect(() => {
+    errorMessage && Swal.fire('Error', errorMessage, 'error');
+  }, [errorMessage]);
 
-  console.log('estoy en user page')
+  useEffect(() => {
+    successMessage && Swal.fire({ icon: 'success', title: successMessage, showConfirmButton: false, timer: 1500 });
+  }),
+    [successMessage];
 
   return (
     <UserLayout>
-              'USER PAGE'
-
+      <Container maxWidth="sm">
+        <Grid backgroundColor="gree" sx={{ minHeight: '90vh', padding: 4 }}>
+          <ButtonsProcess />
+          {currentProcess === 'Add' && <AddPointsView />}
+          {currentProcess === 'Redeem' && <RedeemPointsView />}
+          {currentProcess === 'My Points' && <GetScoreView />}
+        </Grid>
+      </Container>
     </UserLayout>
-  )
-}
+  );
+};

@@ -7,7 +7,6 @@ interface addInput {
   points: number;
   detail: string;
   idUser: string;
-
 }
 
 export class AddUseCase {

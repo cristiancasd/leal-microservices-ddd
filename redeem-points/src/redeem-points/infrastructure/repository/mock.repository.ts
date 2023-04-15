@@ -6,7 +6,8 @@ const MOCK_SCORE = {
   documentCc: 4541,
   name: 'cualquier nombre',
   points: 23,
-  detail: 'reclamé el premio X'
+  detail: 'reclamé el premio X',
+  idUser: 'cualquierUUID -user'
 };
 
 export class MockRepository implements RedeemRepository {

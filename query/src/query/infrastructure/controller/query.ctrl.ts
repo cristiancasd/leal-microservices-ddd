@@ -23,9 +23,8 @@ export class QueryController {
   }
 
   public async getScoreById(req: Request, res: Response) {
-    let id = req.params.id;
-    const score = await this.getUseCase.getScoreById(id);
-
+    let documentCc = req.params.documentCc;
+    const score = await this.getUseCase.getScoreById(+documentCc);
     res.send(score);
   }
 }

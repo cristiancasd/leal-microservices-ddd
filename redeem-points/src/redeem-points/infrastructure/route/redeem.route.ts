@@ -22,7 +22,8 @@ route.post(
     body('documentCc').isNumeric().withMessage('documentCc must be number'),
     body('name').isString().withMessage('name must be String'),
     body('points').isNumeric().withMessage('points must be number'),
-    body('detail').isString().withMessage('detail must be String')
+    body('detail').isString().withMessage('detail must be String'),
+    body('idUser').isUUID().withMessage('idUser must be UUID')
   ],
   validateRequest,
   redeemCtrl.insertCtrl

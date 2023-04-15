@@ -32,13 +32,13 @@ export class DynamoRepository implements QueryRepository {
     return query;
   }
 
-  async getScoreById(id: string): Promise<any | null> {
+  async getScoreById(documentCc: number): Promise<any | null> {
     //console.log('buscando ...', id);
     const response = await this._db
       .getItem({
         TableName: DynamoDB.TABLE_NAME,
         Key: {
-          id: { S: id }
+          documentCc: { N: documentCc.toString() }
         }
         // ProjectionExpression: 'documentCc'
       })

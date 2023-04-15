@@ -25,8 +25,7 @@ route.post(
     body('name').isString().withMessage('name must be String'),
     body('points').isNumeric().withMessage('points must be number'),
     body('detail').isString().withMessage('detail must be String'),
-    body('idUser').isUUID().withMessage('idUser must be UUID'),
-
+    body('idUser').isUUID().withMessage('idUser must be UUID')
   ],
   validateRequest,
 

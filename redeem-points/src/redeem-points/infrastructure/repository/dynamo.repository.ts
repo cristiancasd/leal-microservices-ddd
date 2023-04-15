@@ -25,6 +25,9 @@ export class DynamoRepository implements RedeemRepository {
           },
           detail: {
             S: redeem.detail
+          },
+          idUser: {
+            S: redeem.idUser
           }
         }
       })
