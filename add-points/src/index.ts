@@ -1,10 +1,9 @@
 //import mongoose from 'mongoose';
 //import dbInit from './add-points/infrastructure/db/aws';
 import { app } from './app';
-import "dotenv/config";
+import 'dotenv/config';
 
-
-const start = async () => { 
+const start = async () => {
   console.log('Starting');
   /*if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
@@ -25,7 +24,7 @@ const start = async () => {
   }
 
   app.listen(8060, () => {
-    console.log('node_env ', process.env.NODE_ENV)
+    console.log('node_env ', process.env.NODE_ENV);
     console.log('Listening on port 8060!!');
   });
 };

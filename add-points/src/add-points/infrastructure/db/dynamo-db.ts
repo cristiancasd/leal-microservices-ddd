@@ -1,18 +1,19 @@
-import AWS from './aws'
-import "dotenv/config";
+import AWS from './aws';
+import 'dotenv/config';
 
 export class DynamoDB {
-  static TABLE_NAME: string = process.env.NODE_ENV==='production'
-  ? 'leal-add-points'
-  : 'leal-add-points-testing'
-  
-  private static _INSTANCE: AWS.DynamoDB
+  static TABLE_NAME: string =
+    process.env.NODE_ENV === 'production'
+      ? 'leal-add-points'
+      : 'leal-add-points-testing';
 
-  static getInstance (options?: AWS.DynamoDB.ClientConfiguration): AWS.DynamoDB {
+  private static _INSTANCE: AWS.DynamoDB;
+
+  static getInstance(options?: AWS.DynamoDB.ClientConfiguration): AWS.DynamoDB {
     if (this._INSTANCE === undefined) {
-      this._INSTANCE = new AWS.DynamoDB(options)
+      this._INSTANCE = new AWS.DynamoDB(options);
     }
 
-    return this._INSTANCE
+    return this._INSTANCE;
   }
 }

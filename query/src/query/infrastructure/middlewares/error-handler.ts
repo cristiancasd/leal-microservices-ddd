@@ -5,16 +5,15 @@ export const errorHandler = (
   err: Error,
   req: Request,
   res: Response,
-  next: NextFunction 
+  next: NextFunction
 ) => {
-
-    console.log('estoy en error handler')
+  //console.log('estoy en error handler');
   if (err instanceof CustomError) {
-    console.log(err);
+    //console.log(err);
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
 
-  console.log('algo salio mal')
+  console.log('algo salio mal');
 
   res.status(400).send({
     errors: [{ message: 'Something went wrong' }]

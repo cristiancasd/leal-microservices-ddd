@@ -1,6 +1,5 @@
-import { AddEntity } from "./add.entity";
+import { AddEntity } from './add.entity';
 
 export interface AddRepository {
-  createAdd(add:AddEntity): Promise<AddEntity | null>;
+  createAdd(add: AddEntity): Promise<AddEntity | null>;
 }
- 

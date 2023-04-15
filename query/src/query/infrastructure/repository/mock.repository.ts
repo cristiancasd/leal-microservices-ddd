@@ -1,24 +1,21 @@
-
-import { QueryEntity } from "../../domain/query.entity";
-import { QueryRepository } from "../../domain/query.repository";
+import { QueryEntity } from '../../domain/query.entity';
+import { QueryRepository } from '../../domain/query.repository';
 
 const MOCK_SCORE = {
-    id:'cualquierId',
-    documentCc: 4541,
-    name: "cualquier nombre",
-    score: 23,
-  };
+  id: 'cualquierId',
+  documentCc: 4541,
+  name: 'cualquier nombre',
+  score: 23
+};
 
 export class MockRepository implements QueryRepository {
- 
   async updatePoints(scoreIn: QueryEntity): Promise<any> {
-    const res = MOCK_SCORE
-    return res
+    const res = MOCK_SCORE;
+    return res;
   }
-  
 
-  async getScoreById(id: String): Promise<QueryEntity> {
-    const user = MOCK_SCORE
+  async getScoreById(id: string): Promise<QueryEntity> {
+    const user = MOCK_SCORE;
     return user;
   }
 }
