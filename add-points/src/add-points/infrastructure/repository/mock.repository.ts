@@ -6,12 +6,14 @@ const MOCK_SCORE = {
   documentCc: 4541,
   name: 'cualquier nombre',
   points: 23,
-  detail: 'información de valor de los puntos'
+  detail: 'información de valor de los puntos',
+  idUser: 'cualquierUUID',
+
 };
 
 export class MockRepository implements AddRepository {
   async createAdd(scoreIn: AddEntity): Promise<any> {
-    const user = MOCK_SCORE;
-    return user;
+    const res = MOCK_SCORE;
+    return res;
   }
 }

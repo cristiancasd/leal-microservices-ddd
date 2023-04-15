@@ -4,4 +4,6 @@ export interface AddEntity {
   name: string;
   points: number;
   detail: string;
+  idUser: string;
+
 }

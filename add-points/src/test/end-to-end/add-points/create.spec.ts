@@ -6,14 +6,17 @@ const data = {
   documentCc: 455554,
   name: 'katiusca',
   points: 54,
-  detail: 'fsdf'
+  detail: 'fsdf',
+  idUser: 'a9e2c4a3-403b-42a1-a716-af09c3cf1e70' // random User to test
 };
 
 const dataErr = {
   d: 455554, //body must have "documentCc"
   n: 'katiusca', //body must have "name"
   points: '55lf4', //points must be number
-  de: 'fsdf' //body must have "detail"
+  de: 'fsdf', //body must have "detail"
+  idUser: 455455 // idUser, must be UUID
+
 };
 
 describe('CREATE ADD-POINTS - POST /add/create', () => {
@@ -37,6 +40,6 @@ describe('CREATE ADD-POINTS - POST /add/create', () => {
     expect(response.body).toBeInstanceOf(Object);
     expect(response.body.errors).toBeDefined();
     expect(response.body.errors).toBeInstanceOf(Array);
-    expect(response.body.errors.length).toEqual(4);
+    expect(response.body.errors.length).toEqual(5);
   });
 });

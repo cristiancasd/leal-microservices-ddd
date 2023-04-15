@@ -1,13 +1,13 @@
 import { AddUseCase } from '../../../add-points/application/addUseCase';
 import { MockRepository } from '../../../add-points/infrastructure/repository/mock.repository';
-import { v4 as uuid } from 'uuid';
 import { MockTestRepository } from '../../../add-points/infrastructure/repository/mockTest.repository';
 
 const data = {
   documentCc: 455554,
   name: 'katiusca',
   points: 54,
-  detail: 'fsdf'
+  detail: 'fsdf',
+  idUser: 'a9e2c4a3-403b-42a1-a716-af09c3cf1e70' // random User to test
 };
 
 describe('UNIT addUseCase -> Post ', () => {
@@ -19,5 +19,7 @@ describe('UNIT addUseCase -> Post ', () => {
     expect(res?.documentCc).toEqual(data.documentCc);
     expect(res?.points).toEqual(data.points);
     expect(res?.detail).toEqual(data.detail);
+    expect(res?.idUser).toEqual(data.idUser);
+
   });
 });

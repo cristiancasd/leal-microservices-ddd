@@ -25,7 +25,10 @@ export class DynamoRepository implements AddRepository {
           },
           detail: {
             S: add.detail
-          }
+          },
+          idUser: {
+            S: add.idUser
+          },
         }
       })
       .promise();
