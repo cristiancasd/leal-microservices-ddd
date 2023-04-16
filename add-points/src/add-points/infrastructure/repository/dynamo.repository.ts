@@ -1,5 +1,5 @@
-import { AddEntity } from '../../domain/add.entity';
-import { AddRepository } from '../../domain/add.repository';
+import { AddEntity } from '../../domain/addPoints/add.entity';
+import { AddRepository } from '../../domain/addPoints/add.repository';
 import { DynamoDB } from '../db/dynamo-db';
 
 export class DynamoRepository implements AddRepository {

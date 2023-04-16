@@ -16,6 +16,7 @@ export class UpdateUseCase {
   }
 
   public addPoints = async (input: scoreInput) => {
+    console.log('estoy en add ', input);
     let inputValue = new QueryValue(input);
     const query = await this._queryRepository.getScoreById(
       inputValue.documentCc
@@ -29,16 +30,20 @@ export class UpdateUseCase {
   };
 
   public redeemPoints = async (input: scoreInput) => {
+    console.log('on redeemPoints ', input);
     let inputValue = new QueryValue(input);
     const query = await this._queryRepository.getScoreById(
       inputValue.documentCc
     );
+    console.log('+query.score', query?.score);
 
     if (query && +query.score >= inputValue.score) {
       inputValue.score = +query.score - inputValue.score;
       const scoreCreated = await this._queryRepository.updatePoints(inputValue);
+      console.log('*****scoreCreated ****', scoreCreated);
       return scoreCreated;
     } else {
+      console.log('sorry, you dont have enough points');
       throw new BadRequestError('sorry, you dont have enough points');
     }
   };

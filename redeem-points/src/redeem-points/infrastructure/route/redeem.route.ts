@@ -29,4 +29,9 @@ route.post(
   redeemCtrl.insertCtrl
 );
 
+route.post('/events', (req, res) => {
+  console.log('Received Event', req.body.type);
+  res.send({});
+});
+
 export default route;

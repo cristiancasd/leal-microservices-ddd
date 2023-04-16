@@ -1,5 +1,5 @@
-import { AddRepository } from '../domain/add.repository';
-import { AddValue } from '../domain/add.value';
+import { AddRepository } from '../domain/addPoints/add.repository';
+import { AddValue } from '../domain/addPoints/add.value';
 import { DataBaseError } from '../domain/errors/database-error';
 
 interface addInput {
@@ -11,11 +11,7 @@ interface addInput {
 }
 
 export class AddUseCase {
-  private readonly _addRepository: AddRepository;
-  constructor(addRepository: AddRepository) {
-    this._addRepository = addRepository;
-  }
-
+  constructor(private readonly _addRepository: AddRepository) {}
   public createAdd = async (input: addInput) => {
     const addValue = new AddValue(input);
     try {

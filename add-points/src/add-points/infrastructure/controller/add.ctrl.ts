@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
 import { AddUseCase } from '../../application/addUseCase';
-import { QueryValue } from '../../domain/query.value';
+import { EventBusValue } from '../../domain/event-bus/event-bus.value';
+import { QueryValue } from '../../domain/query/query.value';
 
 export class AddController {
   constructor(private addUseCase: AddUseCase) {
@@ -14,14 +15,15 @@ export class AddController {
 
     if (pointsAdded) {
       const data = new QueryValue(pointsAdded);
+      const dataEventBus = new EventBusValue({ data, type: 'PointsAdded' });
+
       try {
-        await axios.put(
-          /*"http://event-bus-srv:4005/events"*/ process.env
-            .API_URL_QUERY_ADD || '',
-          data
-        );
+        //await axios.put( process.env.API_URL_QUERY_ADD || '', data);   //Post directly QUERY service
+        await axios.post('http://localhost:8070/events', dataEventBus); // post using Event BUS
       } catch (err) {
-        console.log('err with axios QUERY backend (adding new Points)', err);
+        console.log(
+          'err with axios QUERY backend (adding new Points)' /*,err*/
+        );
       }
     }
   }

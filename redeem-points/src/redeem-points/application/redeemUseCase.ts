@@ -1,5 +1,5 @@
-import { RedeemRepository } from '../domain/redeem.repository';
-import { RedeemValue } from '../domain/redeem.value';
+import { RedeemRepository } from '../domain/redeem/redeem.repository';
+import { RedeemValue } from '../domain/redeem/redeem.value';
 
 interface addInput {
   documentCc: number;

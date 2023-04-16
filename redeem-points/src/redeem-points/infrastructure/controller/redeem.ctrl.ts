@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { RedeemUseCase } from '../../application/redeemUseCase';
-import { QueryValue } from '../../domain/query.value';
 import axios from 'axios';
+import { QueryValue } from '../../domain/query/query.value';
+import { EventBusValue } from '../../domain/event-bus/event-bus.value';
 
 export class RedeemController {
   constructor(private redeemUseCase: RedeemUseCase) {
@@ -12,14 +13,15 @@ export class RedeemController {
 
     if (redeemAdded) {
       const data = new QueryValue(redeemAdded);
+      const dataEventBus = new EventBusValue({ data, type: 'PointsRedeem' });
+
       try {
-        await axios.put(
-          /*"http://event-bus-srv:4005/events"*/ process.env
-            .API_URL_QUERY_REDEEM || '',
-          data
-        );
+        // await axios.put(/*"http://event-bus-srv:4005/events"*/ process.env.API_URL_QUERY_REDEEM || '', data);
+        await axios.post('http://localhost:8070/events', dataEventBus); // post using Event BUS
       } catch (err) {
-        console.log('err with axios QUERY backend (render new Points)', err);
+        console.log(
+          'err with axios QUERY backend (render new Points)' /*, err*/
+        );
         //todo: Logic when you try to redeem and you dont have points enough
       }
     }
