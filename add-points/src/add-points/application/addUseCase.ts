@@ -1,5 +1,6 @@
 import { AddRepository } from '../domain/add.repository';
 import { AddValue } from '../domain/add.value';
+import { DataBaseError } from '../domain/errors/database-error';
 
 interface addInput {
   documentCc: number;
@@ -17,7 +18,11 @@ export class AddUseCase {
 
   public createAdd = async (input: addInput) => {
     const addValue = new AddValue(input);
-    const addCreated = await this._addRepository.createAdd(addValue);
-    return addCreated;
+    try {
+      const addCreated = await this._addRepository.createAdd(addValue);
+      return addCreated;
+    } catch (err) {
+      throw new DataBaseError();
+    }
   };
 }

@@ -1,7 +1,7 @@
 import { QueryEntity } from './query.entity';
 
 export class QueryValue implements QueryEntity {
-  id:string;
+  id: string;
   documentCc: number;
   name: string;
   score: number;
@@ -10,7 +10,7 @@ export class QueryValue implements QueryEntity {
     documentCc,
     points,
     name,
-    idUser,
+    idUser
   }: {
     documentCc: number;
     points: number;

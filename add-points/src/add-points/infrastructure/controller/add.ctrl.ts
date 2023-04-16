@@ -10,12 +10,16 @@ export class AddController {
 
   public async insertCtrl({ body }: Request, res: Response) {
     const pointsAdded = await this.addUseCase.createAdd(body);
+    res.status(201).send(pointsAdded);
 
     if (pointsAdded) {
-      const data = new QueryValue(pointsAdded)
-      res.status(200).send(pointsAdded);
+      const data = new QueryValue(pointsAdded);
       try {
-        await axios.put(/*"http://event-bus-srv:4005/events"*/ process.env.API_URL_QUERY_ADD || '', data);
+        await axios.put(
+          /*"http://event-bus-srv:4005/events"*/ process.env
+            .API_URL_QUERY_ADD || '',
+          data
+        );
       } catch (err) {
         console.log('err with axios QUERY backend (adding new Points)', err);
       }
