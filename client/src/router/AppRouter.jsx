@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { AuthRoutes } from '../auth/routes/AuthRoutes';
 import { checkDocumentCc } from '../store/auth/thunks';
+import { onResetPoints } from '../store/points/pointsSlice';
 import { CheckingAuth } from '../ui/components/CheckingAuth';
 import { UserRoutes } from '../user/routes/UserRoutes';
 /*import { AuthRoutes } from '../auth/routes/AuthRoutes'
@@ -21,6 +22,7 @@ export const AppRouter = () => {
   useEffect(() => {
     console.log('voy a checkear Inicio auto Auth');
     dispatch(checkDocumentCc());
+    dispatch(onResetPoints());
   }, []);
 
   if (status === 'checking') {

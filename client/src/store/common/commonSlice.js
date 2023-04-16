@@ -4,7 +4,7 @@ export const commonSlice = createSlice({
   name: 'common',
   initialState: {
     colorTheme: 'black',
-    currentProcess: 'My Points',
+    currentProcess: 'Add',
     errorMessage: undefined,
     successMessage: undefined,
     isCommunicating: false,

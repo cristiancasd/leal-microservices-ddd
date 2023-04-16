@@ -1,8 +1,22 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { startGetInitalPoints, startGetPoints } from '../../store/points/thunks';
+import { LoadingUserScore } from '../../ui/components/LoadingUserScore';
 import { UserPage } from '../pages/UserPage';
 
 export const UserRoutes = () => {
   console.log('estoy en User');
+
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { scoreData } = useSelector((state) => state.points);
+
+  useEffect(() => {
+    !scoreData && dispatch(startGetInitalPoints(user.documentCc));
+  }, []);
+
+  if (!scoreData) return <LoadingUserScore />;
 
   return (
     <Routes>
