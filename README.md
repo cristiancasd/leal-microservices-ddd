@@ -16,7 +16,7 @@ Services:
 
 <img src="/images-doc/architectureImg.jpg" alt="Architecture" >
 <img src="/images-doc/servicesImg.jpg" alt="Services" >
-<img src="/images-doc/tableDbImg.jpg" alt="Data Base">
+<img src="/images-doc/tablesDbImg.jpg" alt="Data Base">
 
 #### Dynamo Tables
 1. To use the project (go to aws page)
