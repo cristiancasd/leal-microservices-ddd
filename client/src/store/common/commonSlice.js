@@ -36,15 +36,12 @@ export const commonSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {
   setColorTheme,
   setCurrentProcess,
   setErrorMessage,
   setSuccessMessage,
-
   clearErrorMessage,
   clearSuccessMessage,
-
   setIsCommunicating,
 } = commonSlice.actions;

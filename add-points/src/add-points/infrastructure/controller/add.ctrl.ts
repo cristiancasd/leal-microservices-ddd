@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { AddUseCase } from '../../application/addUseCase';
 import { EventBusValue } from '../../domain/event-bus/event-bus.value';
 import { QueryValue } from '../../domain/query/query.value';

@@ -36,7 +36,7 @@ describe('CREATE REDEEM-POINTS - POST /redeem/create', () => {
     expect(response.statusCode).toBe(400);
   });
 
-  it('bada data- should respond with a 400 status code', async () => {
+  it('bada data- should have 4 errors description', async () => {
     const response = await request(app)
       .post('/api/redeem/create')
       .send(dataErr);

@@ -28,14 +28,14 @@ describe('Add score - PUT /api/query/add/', () => {
     expect(response.body.documentCc).toBeDefined();
   });
 
-  it('should respond with a 200 status', async () => {
+  it('response2 points must be highter than response1 points ', async () => {
     const response1 = await request(app).put(url).send(data);
 
     const response2 = await request(app).put(url).send(data);
     expect(response1.body.score < response2.body.score).toEqual(true);
   });
 
-  it('bad data- respond with a 400 status', async () => {
+  it('bad data- response with a 400 status', async () => {
     const response = await request(app).put(url).send(dataErr);
     expect(response.statusCode).toBe(400);
   });
@@ -50,7 +50,7 @@ describe('Add score - PUT /api/query/add/', () => {
 });
 
 describe('Redeem score - PUT /api/query/redeem/', () => {
-  it('should respond with a 200 status', async () => {
+  it('new score must be less than old score', async () => {
     const addScore = await request(app).put(url).send(data);
     expect(addScore.statusCode).toBe(200);
 
@@ -64,7 +64,7 @@ describe('Redeem score - PUT /api/query/redeem/', () => {
     expect(response.body.documentCc).toBeDefined();
   });
 
-  it('should respond with a 400 status', async () => {
+  it('must be Error when I try to redeem, and i dont have the points enough', async () => {
     const addScore = await request(app).put(url).send(data);
     expect(addScore.statusCode).toBe(200);
 

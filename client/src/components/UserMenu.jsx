@@ -1,17 +1,4 @@
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Button,
-  Divider,
-  Grid,
-  IconButton,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { Avatar, Box, Divider, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../store/auth/thunks';
@@ -25,7 +12,6 @@ export const UserMenu = () => {
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  //console.log('on UserMenu component', user)
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -64,9 +50,6 @@ export const UserMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {/*<MenuItem key='editProfile' onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Edit Profile</Typography>
-                </MenuItem>*/}
         <SelectColorTheme />
         <Divider />
 

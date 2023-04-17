@@ -18,18 +18,6 @@ const getUseCase = new GetUseCase(redeemRepo);
 
 const queryCtrl = new QueryController(updateUseCase, getUseCase);
 
-route.put(
-  `/api/query/add`,
-  [
-    body('id').isUUID().withMessage('id must be UUID'),
-    body('documentCc').isNumeric().withMessage('documentCc must be number'),
-    body('name').isString().withMessage('name must be String'),
-    body('score').isNumeric().withMessage('score must be number')
-  ],
-  validateRequest,
-  queryCtrl.addPoints
-);
-
 route.post(
   `/events`,
   [
@@ -43,10 +31,30 @@ route.post(
     body('data.score').isNumeric().withMessage('score must be number')
   ],
   validateRequest,
-  //queryEventBusCtrl.updatePointsEvent
   queryCtrl.updateEventBusPoints
 );
 
+route.get(
+  `/api/query/getbyid/:documentCc`,
+  [check('documentCc', 'documentCc must be number').isNumeric()],
+  validateRequest,
+  queryCtrl.getScoreById
+);
+
+/** End Points to Sync communication between service  * (just for develop objectives) */
+route.put(
+  `/api/query/add`,
+  [
+    body('id').isUUID().withMessage('id must be UUID'),
+    body('documentCc').isNumeric().withMessage('documentCc must be number'),
+    body('name').isString().withMessage('name must be String'),
+    body('score').isNumeric().withMessage('score must be number')
+  ],
+  validateRequest,
+  queryCtrl.addPoints
+);
+
+/** End Points to Sync communication between service  * (just for develop objectives) */
 route.put(
   `/api/query/redeem`,
   [
@@ -57,13 +65,6 @@ route.put(
   ],
   validateRequest,
   queryCtrl.redeemPoints
-);
-
-route.get(
-  `/api/query/getbyid/:documentCc`,
-  [check('documentCc', 'documentCc must be number').isNumeric()],
-  validateRequest,
-  queryCtrl.getScoreById
 );
 
 export default route;

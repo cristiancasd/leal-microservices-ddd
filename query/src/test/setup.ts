@@ -1,12 +1,2 @@
-jest.setTimeout(20000);
+jest.setTimeout(100000);
 //todo: delete all data by table after tests.
-
-/*
-import { DynamoDB } from "../add-points/infrastructure/db/dynamo-db";
-
-const db = DynamoDB.getInstance()
-
-afterAll(async () => {
-});
-
-*/

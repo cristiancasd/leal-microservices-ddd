@@ -1,25 +1,7 @@
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Button,
-  Divider,
-  Grid,
-  IconButton,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { startLogout } from '../store/auth/thunks';
+import { AppBar, Box, Grid, Toolbar } from '@mui/material';
 import { UserMenu } from './UserMenu';
 
 export const Navbar = () => {
-  const dispatch = useDispatch();
-
   const url_logo = 'https://www.gehnios.com/wp-content/uploads/2019/09/leal.png';
 
   return (

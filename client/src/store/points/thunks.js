@@ -13,10 +13,8 @@ export const startAddPoints = (dataAdd) => {
   return async (dispatch) => {
     dispatch(setIsCommunicating(true));
     try {
-      console.log('data to post ', dataAdd);
       const { data } = await lealAddApi.post('/add/create', dataAdd);
       dispatch(onPointsAdded(data));
-      console.log('data obtenida cuando adicionamos ', data);
       dispatch(setSuccessMessage(`Points Added: ${data.points}`));
       setTimeout(() => {
         dispatch(clearSuccessMessage());
@@ -36,10 +34,8 @@ export const startRedeemPoints = (dataRedeem) => {
   return async (dispatch) => {
     dispatch(setIsCommunicating(true));
     try {
-      console.log('data to redeem ', dataRedeem);
       const { data } = await lealRedeemApi.post('/redeem/create', dataRedeem);
       dispatch(onPointsRedeem(data));
-      console.log('data obtenida cuando redeem ', data);
       dispatch(setSuccessMessage(`Points Redeem: ${data.points}`));
       setTimeout(() => {
         dispatch(clearSuccessMessage());
