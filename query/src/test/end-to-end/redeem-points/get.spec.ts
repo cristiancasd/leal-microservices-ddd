@@ -15,14 +15,9 @@ const urlAdd = '/api/query/add/';
 describe('GET SCORE - GET /api/query/getbyid/', () => {
   it('should respond with a 200 status code ', async () => {
     const scoreAdded = await request(app).put(urlAdd).send(data).expect(200);
-
-    console.log('scoreAdded.body ....', scoreAdded.statusCode, scoreAdded.body);
     const response = await request(app)
       .get(url + data.documentCc)
       .expect(200);
-
-    console.log('response.body ....', response.statusCode, response.body);
-
     expect(+response.body.score).toEqual(scoreAdded.body.score);
   });
 
@@ -44,7 +39,7 @@ describe('GET SCORE - GET /api/query/getbyid/', () => {
     expect(response.statusCode).toBe(404);
   });
 
-  it('should respond with a 404 status code (User dont have data )', async () => {
+  it('should have a error message (User dont have data )', async () => {
     const response = await request(app).get(url + 87845484); //random UUID
     expect(response.body.errors).toBeDefined();
     expect(response.body.errors[0].message).toBeDefined();

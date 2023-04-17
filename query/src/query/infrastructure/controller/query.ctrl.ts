@@ -9,7 +9,6 @@ export class QueryController {
   ) {}
 
   public addPoints = async ({ body }: Request, res: Response) => {
-    console.log('estoy en el controlador normal Add, ', body);
     const point = await this.updateUseCase.addPoints(body);
     res.send(point);
   };
@@ -26,7 +25,6 @@ export class QueryController {
   };
 
   public updateEventBusPoints = async ({ body }: Request, res: Response) => {
-    console.log('on updateEventBusPoints, ', body.type);
     const point =
       body.type && body.type === 'PointsAdded'
         ? await this.updateUseCase.addPoints(body.data)

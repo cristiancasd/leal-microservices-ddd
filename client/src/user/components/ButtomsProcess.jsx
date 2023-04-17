@@ -1,13 +1,10 @@
 import { Button, Grid, Typography } from '@mui/material';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentProcess } from '../../store/common/commonSlice';
 
 export const ButtonsProcess = (props) => {
   const dispatch = useDispatch();
   const { currentProcess, isCommunicating } = useSelector((state) => state.common);
-
-  //const [currentProcess, setCurrentProcess] = useState('General Info');
 
   const buttonsControll = (
     <Grid container spacing={0} alignItems="center" marginBottom="20px">

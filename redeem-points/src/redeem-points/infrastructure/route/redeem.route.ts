@@ -18,7 +18,6 @@ const redeemCtrl = new RedeemController(redeemUseCase);
 route.post(
   `/api/redeem/create`,
   [
-    //body('id').isUUID().withMessage('id must be UUID'),
     body('documentCc').isNumeric().withMessage('documentCc must be number'),
     body('name').isString().withMessage('name must be String'),
     body('points').isNumeric().withMessage('points must be number'),

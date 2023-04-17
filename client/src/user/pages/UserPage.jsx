@@ -14,7 +14,6 @@ export const UserPage = () => {
 
   const { errorMessage, successMessage } = useSelector((state) => state.common);
 
-  console.log('estoy en user page');
   const { currentProcess, isCommunicating } = useSelector((state) => state.common);
   const { user } = useSelector((state) => state.auth);
   const { scoreData } = useSelector((state) => state.points);

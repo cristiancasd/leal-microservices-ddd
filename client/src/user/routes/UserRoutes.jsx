@@ -6,8 +6,6 @@ import { LoadingUserScore } from '../../ui/components/LoadingUserScore';
 import { UserPage } from '../pages/UserPage';
 
 export const UserRoutes = () => {
-  console.log('estoy en User');
-
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { scoreData } = useSelector((state) => state.points);

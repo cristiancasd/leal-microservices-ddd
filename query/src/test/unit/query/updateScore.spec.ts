@@ -22,7 +22,6 @@ describe('UNIT queryUseCase -> Post - Add Points ', () => {
     const res = await updateUseCase.addPoints(data);
     expect(res?.score).toBeDefined();
     expect(res?.score).toEqual(140); //100 base mock, 40 added
-    // console.log('respuesta...',res)
   });
 
   it('should create score if dont exist previus one', async () => {
@@ -40,7 +39,7 @@ describe('UNIT queryUseCase -> Post - Redeem Points ', () => {
     const updateUseCase = new UpdateUseCase(repo);
     const res = await updateUseCase.redeemPoints(data);
     expect(res?.score).toBeDefined();
-    expect(res?.score).toEqual(60); //100 base mock, 40 added
+    expect(res?.score).toEqual(60); //100 base mock, 40 redeem
   });
 
   it('should get Error when I try redeem newScore that is higher than old score', async () => {
@@ -50,7 +49,7 @@ describe('UNIT queryUseCase -> Post - Redeem Points ', () => {
       const res = await updateUseCase.redeemPoints(dataBad);
       expect(res?.score).toBeNull();
     } catch (err) {
-      expect(err instanceof Error).toBe(true); //expect(res?.score).toEqual(60) //100 base mock, 40 added
+      expect(err instanceof Error).toBe(true);
     }
   });
 
@@ -64,7 +63,7 @@ describe('UNIT queryUseCase -> Post - Redeem Points ', () => {
       });
       expect(res?.score).toBeNull();
     } catch (err) {
-      expect(err instanceof Error).toBe(true); //expect(res?.score).toEqual(60) //100 base mock, 40 added
+      expect(err instanceof Error).toBe(true);
     }
   });
 });

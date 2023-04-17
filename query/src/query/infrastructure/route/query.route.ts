@@ -43,7 +43,6 @@ route.post(
     body('data.score').isNumeric().withMessage('score must be number')
   ],
   validateRequest,
-  //queryEventBusCtrl.updatePointsEvent
   queryCtrl.updateEventBusPoints
 );
 
