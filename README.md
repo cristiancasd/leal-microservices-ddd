@@ -14,6 +14,9 @@ Services:
 - Testing: Jest
 - Front: Using hooks and redux(easy scalable code)
 
+<img src="/images-doc/architectureImg.jpg" alt="Architecture" >
+<img src="/images-doc/servicesImg.jpg" alt="Services" >
+<img src="/images-doc/tableDbImg.jpg" alt="Data Base">
 
 #### Dynamo Tables
 1. To use the project (go to aws page)
@@ -46,7 +49,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 4. In the root of the project
 ```sakffold dev```
 
-5. In your browseropen : http://myleal.com/#/login
+5. In your browseropen : http://myleal.com
 
 6. default users to use (loging CC)
 	- 1234
@@ -57,14 +60,17 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 ## To test
 ```
 cd add-points
+npm install
 npm test 
 ```
 ```
 cd redeem-points
+npm install
 npm test
 ```
 ```
 cd query
+npm install
 npm test
 ```
 
@@ -74,30 +80,30 @@ npm test
 2. Install All dependences and start each service
 
  cd add-points
-> npm install
-> change the .env.template to .env (fillout the missing data)
-> npm start
+> ``npm install``
+> change the ``.env.template`` to ``.env`` (fillout the missing data)
+> ``npm start``
 
 
 cd redeem-points
-> npm install
-> change the .env.template to .env (fillout the missing data)
-> npm start
+> ``npm install``
+> change the ``.env.template`` to ``.env`` (fillout the missing data)
+> ``npm start``
 
 cd query
-> npm install
-> change the .env.template to .env (fillout the missing data)
-> npm start
+> ``npm install``
+> change the ``.env.template`` to ``.env`` (fillout the missing data)
+> ``npm start``
 
 cd event-bus
-> npm install
-> change the .env.template to .env (fillout the missing data)
-> npm start
+> ``npm install``
+> change the ``.env.template`` to ``.env`` (fillout the missing data)
+> ``npm start``
 
 cd client
-> yarn install
-> change the .env.template to .env (fillout the missing data)
-> npm start
+> ``yarn install``
+> change the ``.env.template`` to ``.env`` (fillout the missing data)
+> ``yarn dev``
 
 
 3. Test with the front
