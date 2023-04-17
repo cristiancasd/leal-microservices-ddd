@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-bus
+  template:
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: cristiancasd/leal-event-bus
+          env:
+            - name: URL_SRV_REDEEM
+              value: 'http://redeem-points-srv:8062'
+            - name: URL_SRV_ADD_POINTS
+              value: 'http://add-points-srv:8060'
+            - name: URL_SRV_QUERY
+              value: 'http://query-srv:8061'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-srv
+spec:
+  selector:
+    app: event-bus
+  ports:
+    - name: event-bus
+      protocol: TCP
+      port: 8070
+      targetPort: 8070 

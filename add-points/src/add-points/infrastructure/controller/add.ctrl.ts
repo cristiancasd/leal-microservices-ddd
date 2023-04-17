@@ -19,7 +19,10 @@ export class AddController {
 
       try {
         //await axios.put( process.env.API_URL_QUERY_ADD || '', data);   //Post directly QUERY service
-        await axios.post('http://localhost:8070/events', dataEventBus); // post using Event BUS
+        await axios.post(
+          process.env.API_URL_SRV_EVENT || 'http://localhost:8070/events',
+          dataEventBus
+        ); // post using Event BUS
       } catch (err) {
         console.log(
           'err with axios QUERY backend (adding new Points)' /*,err*/

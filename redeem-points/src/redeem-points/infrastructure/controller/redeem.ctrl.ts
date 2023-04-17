@@ -16,8 +16,11 @@ export class RedeemController {
       const dataEventBus = new EventBusValue({ data, type: 'PointsRedeem' });
 
       try {
-        // await axios.put(/*"http://event-bus-srv:4005/events"*/ process.env.API_URL_QUERY_REDEEM || '', data);
-        await axios.post('http://localhost:8070/events', dataEventBus); // post using Event BUS
+        // await axios.put(process.env.API_URL_QUERY_REDEEM || '', data); //Post directly QUERY service
+        await axios.post(
+          process.env.API_URL_SRV_EVENT || 'http://localhost:8070/events',
+          dataEventBus
+        ); // post using Event BUS
       } catch (err) {
         console.log(
           'err with axios QUERY backend (render new Points)' /*, err*/

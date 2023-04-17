@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: add-points-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: add-points
+  template:
+    metadata:
+      labels:
+        app: add-points
+    spec:
+      containers:
+        - name: add-points
+          image: cristiancasd/leal-add-points
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-id-secret
+                  key: AWS_ACCESS_KEY_ID
+
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-key-secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_DEFAULT_REGION
+              value: 'us-east-1'
+            - name: API_URL_SRV_EVENT
+              value: 'http://event-bus-srv:8070/events'
+              
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: add-points-srv
+spec:
+  selector:
+    app: add-points
+  ports:
+    - name: add-points
+      protocol: TCP
+      port: 8060
+      targetPort: 8060
