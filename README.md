@@ -25,9 +25,9 @@ Services:
 	- Create a Dynamo table named leal-redeem-points with partition key  (id:string)
 
 2. To test (go to aws page)
-	- Create a Dynamo table named leal-score with partition key  (documentCc:number)
-	- Create a Dynamo table named leal-add-points with partition key  (id:string)
-	- Create a Dynamo table named leal-redeem-points with partition key  (id:string)
+	- Create a Dynamo table named leal-score-testing with partition key  (documentCc:number)
+	- Create a Dynamo table named leal-add-points-testing with partition key  (id:string)
+	- Create a Dynamo table named leal-redeem-points-testing with partition key  (id:string)
 
 ## Use App in kubernetes (Docker-deskpot)
 
