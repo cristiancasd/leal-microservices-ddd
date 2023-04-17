@@ -5,7 +5,7 @@
 Architecture: DDD
 Services: 
 -- (add-points | redeem-points | query): Typescript
--- Event-bus: JavaScryp
+-- Event-bus: JavaScrip
 
 - Handler error implemented
 - github actions: workflows implemented to have a main branch secure
@@ -17,6 +17,8 @@ Services:
 <img src="/images-doc/architectureImg.jpg" alt="Architecture" >
 <img src="/images-doc/servicesImg.jpg" alt="Services" >
 <img src="/images-doc/tablesDbImg.jpg" alt="Data Base">
+<img src="/images-doc/frontImg.jpg" alt="Front React App">
+
 
 #### Dynamo Tables
 1. To use the project (go to aws page)
