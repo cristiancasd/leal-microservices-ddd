@@ -28,8 +28,12 @@ route.post(
     body('idUser').isUUID().withMessage('idUser must be UUID')
   ],
   validateRequest,
-
   addCtrl.insertCtrl
 );
+
+route.post('/events', (req, res) => {
+  console.log('Received Event', req.body.type);
+  res.send({});
+});
 
 export default route;

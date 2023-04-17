@@ -13,9 +13,10 @@ const redeemRepo = new DynamoRepository(); //to use db dynamoDB
 //const redeemRepo = new MockRepository(); //to use mock dynamoDB
 
 const updateUseCase = new UpdateUseCase(redeemRepo);
+
 const getUseCase = new GetUseCase(redeemRepo);
 
-const addCtrl = new QueryController(updateUseCase, getUseCase);
+const queryCtrl = new QueryController(updateUseCase, getUseCase);
 
 route.put(
   `/api/query/add`,
@@ -26,7 +27,24 @@ route.put(
     body('score').isNumeric().withMessage('score must be number')
   ],
   validateRequest,
-  addCtrl.addPoints
+  queryCtrl.addPoints
+);
+
+route.post(
+  `/events`,
+  [
+    body('type').isString().withMessage('name must be String'),
+    body('data').isObject(),
+    body('data.id').isUUID().withMessage('id must be UUID'),
+    body('data.documentCc')
+      .isNumeric()
+      .withMessage('documentCc must be number'),
+    body('data.name').isString().withMessage('name must be String'),
+    body('data.score').isNumeric().withMessage('score must be number')
+  ],
+  validateRequest,
+  //queryEventBusCtrl.updatePointsEvent
+  queryCtrl.updateEventBusPoints
 );
 
 route.put(
@@ -38,17 +56,14 @@ route.put(
     body('score').isNumeric().withMessage('score must be number')
   ],
   validateRequest,
-  addCtrl.redeemPoints
+  queryCtrl.redeemPoints
 );
 
 route.get(
   `/api/query/getbyid/:documentCc`,
-  [
-    check('documentCc', 'documentCc must be number').isNumeric()
-    //check('id', 'id must be UUID').isUUID()
-  ],
+  [check('documentCc', 'documentCc must be number').isNumeric()],
   validateRequest,
-  addCtrl.getScoreById
+  queryCtrl.getScoreById
 );
 
 export default route;

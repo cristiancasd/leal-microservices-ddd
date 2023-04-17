@@ -7,7 +7,7 @@ export const blackTheme = createTheme({
     },
     secondary: {
       //main: '#D3C826'
-      main: '#202020',
+      main: '#656565',
     },
 
     tertiary: {

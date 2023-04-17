@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - host: myleal.com 
+      http:
+        paths:
+
+          - path: /api/query/?(.*)
+            pathType: Prefix 
+            backend:
+              service:
+                name: query-srv
+                port:
+                  number: 8061
+                  
+                  
+          - path: /api/add/?(.*)
+            pathType: Prefix 
+            backend:
+              service:
+                name: add-points-srv
+                port:
+                  number: 8060
+
+
+          - path: /api/redeem/?(.*)
+            pathType: Prefix 
+            backend:
+              service:
+                name: redeem-points-srv
+                port:
+                  number: 8062
+
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 8063

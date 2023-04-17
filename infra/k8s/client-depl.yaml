@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: cristiancasd/leal-client
+          env:
+            - name: VITE_API_URL_ADD
+              value: 'http://myleal.com/api'
+
+              #value: 'http://localhost:8060/api'
+
+            - name: VITE_API_URL_QUERY
+              value: 'http://myleal.com/api'
+              #value: 'http://localhost:8061/api'
+
+            - name: VITE_API_URL_REDEEM
+              value: 'http://myleal.com/api'
+              #value: 'http://redeem-points-srv:8062/api'
+
+              #value: 'http://localhost:8062/api'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+spec:
+  selector:
+    app: client
+  ports:
+    - name: client
+      protocol: TCP
+      port: 8063
+      targetPort: 8063 
+ 

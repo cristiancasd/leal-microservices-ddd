@@ -24,7 +24,7 @@ describe('CREATE ADD-POINTS - POST /add/create', () => {
     expect(response.statusCode).toBe(201);
   });
 
-  it('should respond with a 200 status code', async () => {
+  it('should respond a object', async () => {
     const response = await request(app).post('/api/add/create').send(data);
     expect(response.body).toBeInstanceOf(Object);
   });

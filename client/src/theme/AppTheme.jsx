@@ -2,7 +2,6 @@ import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { blackTheme } from './blackTheme';
-import { redTheme } from './redTheme';
 import { yellowTheme } from './yellowTheme';
 
 export const AppTheme = ({ children }) => {

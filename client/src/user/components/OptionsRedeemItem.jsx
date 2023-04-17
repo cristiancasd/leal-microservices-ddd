@@ -7,6 +7,7 @@ export const OptionsRedeemItem = (optionToRedeem) => {
   const { supplier, nameProduct, points, image } = optionToRedeem;
   const { user } = useSelector((state) => state.auth);
   const { isCommunicating } = useSelector((state) => state.common);
+  const { scoreData } = useSelector((state) => state.points);
 
   const dispatch = useDispatch();
 
@@ -82,7 +83,7 @@ export const OptionsRedeemItem = (optionToRedeem) => {
                     size="small"
                     onClick={redeemOption}
                     color="gris"
-                    disabled={isCommunicating}
+                    disabled={isCommunicating || scoreData.score < points}
                   >
                     Redeem
                   </Button>{' '}

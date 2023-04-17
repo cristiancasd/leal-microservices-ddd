@@ -6,25 +6,31 @@ export class QueryController {
   constructor(
     private updateUseCase: UpdateUseCase,
     private getUseCase: GetUseCase
-  ) {
-    this.addPoints = this.addPoints.bind(this);
-    this.redeemPoints = this.redeemPoints.bind(this);
-    this.getScoreById = this.getScoreById.bind(this);
-  }
+  ) {}
 
-  public async addPoints({ body }: Request, res: Response) {
+  public addPoints = async ({ body }: Request, res: Response) => {
+    console.log('estoy en el controlador normal Add, ', body);
     const point = await this.updateUseCase.addPoints(body);
     res.send(point);
-  }
+  };
 
-  public async redeemPoints({ body }: Request, res: Response) {
+  public redeemPoints = async ({ body }: Request, res: Response) => {
     const point = await this.updateUseCase.redeemPoints(body);
     res.send(point);
-  }
+  };
 
-  public async getScoreById(req: Request, res: Response) {
+  public getScoreById = async (req: Request, res: Response) => {
     let documentCc = req.params.documentCc;
     const score = await this.getUseCase.getScoreById(+documentCc);
     res.send(score);
-  }
+  };
+
+  public updateEventBusPoints = async ({ body }: Request, res: Response) => {
+    console.log('on updateEventBusPoints, ', body.type);
+    const point =
+      body.type && body.type === 'PointsAdded'
+        ? await this.updateUseCase.addPoints(body.data)
+        : await this.updateUseCase.redeemPoints(body.data);
+    res.send(point);
+  };
 }

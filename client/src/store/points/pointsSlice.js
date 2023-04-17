@@ -15,13 +15,13 @@ export const pointsSlice = createSlice({
   },
   reducers: {
     onPointsAdded: (state, { payload }) => {
-      state.scoreData = { ...state.scoreData, score: state.scoreData.score + +payload.points };
+      state.scoreData = { ...state.scoreData, score: +state.scoreData.score + +payload.points };
       state.pointsAdded = payload;
       state.pointsRedeem = undefined;
     },
 
     onPointsRedeem: (state, { payload }) => {
-      state.scoreData = { ...state.scoreData, score: state.scoreData.score - +payload.points };
+      state.scoreData = { ...state.scoreData, score: +state.scoreData.score - +payload.points };
       state.pointsAdded = undefined;
       state.pointsRedeem = payload;
     },
@@ -31,8 +31,20 @@ export const pointsSlice = createSlice({
       state.pointsAdded = undefined;
       state.pointsRedeem = undefined;
     },
+
+    onNewUserScore: (state, { payload }) => {
+      state.scoreData = payload;
+      state.pointsAdded = undefined;
+      state.pointsRedeem = undefined;
+    },
+
+    onResetPoints: (state, { payload }) => {
+      state.scoreData = undefined;
+      state.pointsAdded = undefined;
+      state.pointsRedeem = undefined;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { onPointsAdded, onPointsRedeem, onGetScore } = pointsSlice.actions;
+export const { onPointsAdded, onPointsRedeem, onGetScore, onNewUserScore, onResetPoints } = pointsSlice.actions;
