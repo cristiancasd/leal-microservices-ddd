@@ -5,8 +5,9 @@ import { connectProducer } from '../../../add-points/infrastructure/broker/kafka
 
 beforeAll(async () => {
   await connectProducer();
-}
-)
+})
+
+jest.useFakeTimers()
 
 const data = {
   documentCc: 455554,
