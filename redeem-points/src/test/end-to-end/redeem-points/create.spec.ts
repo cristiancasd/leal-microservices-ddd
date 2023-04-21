@@ -6,6 +6,9 @@ import { connectProducer } from '../../../redeem-points/infrastructure/broker/ka
 beforeAll(async () => {
   await connectProducer();
 })
+
+//jest.useFakeTimers()
+
 const data = {
   documentCc: 455554,
   name: 'katiusca',
