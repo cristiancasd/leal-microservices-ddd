@@ -7,7 +7,7 @@ beforeAll(async () => {
   await connectProducer();
 })
 
-//jest.useFakeTimers()
+jest.useFakeTimers()
 
 const data = {
   documentCc: 455554,
