@@ -31,20 +31,12 @@ jobs:
           KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
           KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
           KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-        options: >-
-          --health-cmd "bash .github/workflows/wait-for-it.sh localhost:9092 --timeout=60 --strict -- echo 'Kafka is ready!'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
 
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Waiting to kafka server started
-        run: .github/workflows/wait-for-it.sh localhost 9092 -t 60 -- echo "kafka server ready, testing..."
 
       - name: Run tests
         run: cd add-points && npm install && npm run test:ci
