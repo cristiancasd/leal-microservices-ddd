@@ -70,7 +70,7 @@ describe('Add score - POST type: Add points', () => {
 
 describe('Redeem score - POST points Redeemed', () => {
   it('new score must be less than old score', async () => {
-    const myScore = await request(app).post(url).send(eventOkRedeem);
+    const myScore = await request(app).post(url).send(eventOkAdd);
     expect(myScore.statusCode).toBe(200);
     const response = await request(app)
       .post(url)
@@ -86,7 +86,7 @@ describe('Redeem score - POST points Redeemed', () => {
   });
 
   it('must be Error when I try to redeem, and I dont have the points enough', async () => {
-    const myScore = await request(app).post(url).send(eventOkRedeem);
+    const myScore = await request(app).post(url).send(eventOkAdd);
     expect(myScore.statusCode).toBe(200);
 
     const response = await request(app)
