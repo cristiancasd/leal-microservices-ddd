@@ -4,7 +4,7 @@ import { AddUseCase } from '../../application/addUseCase';
 import { QueryValue } from '../../domain/query/query.value';
 
 export class AddController {
-  constructor(
+  constructor( 
     private addUseCase: AddUseCase, 
     private addBrokerUserCase: AddBrokerUserCase ) {}
 

@@ -1,6 +1,12 @@
 import { app } from '../../../app';
 
 import request from 'supertest';
+import { connectProducer } from '../../../add-points/infrastructure/broker/kafka';
+
+beforeAll(async () => {
+  await connectProducer();
+}
+)
 
 const data = {
   documentCc: 455554,

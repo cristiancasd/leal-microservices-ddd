@@ -1,5 +1,6 @@
 import { app } from './app';
-import { connectConsumer } from './query/infrastructure/kafka/kafka';
+import { connectConsumer } from './query/infrastructure/broker/kafka';
+import { listenBroker } from './query/infrastructure/broker/routes';
 
 const start = async () => {
 
@@ -8,6 +9,10 @@ const start = async () => {
   while (wrongConnection) {
     try {
       await connectConsumer();
+      console.log('lista la conexion')
+      await listenBroker();
+      console.log('escuchando broker')
+
       wrongConnection = false; 
     } catch (err) {
       console.log('kafka ... error conecting with consumer');

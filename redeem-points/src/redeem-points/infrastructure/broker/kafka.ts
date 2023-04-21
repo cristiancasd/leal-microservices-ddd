@@ -4,7 +4,7 @@ import { Kafka } from "kafkajs";
 const brokers = ["0.0.0.0:9092"];  // enter to Docker container and look for Ports
 
 const kafka = new Kafka({
-  clientId: "add-points-app",
+  clientId: "redeem-points-app",
   brokers,
 });
 

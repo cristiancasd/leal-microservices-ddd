@@ -1,9 +1,28 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { RedeemUseCase } from '../../application/redeemUseCase';
-import axios from 'axios';
 import { QueryValue } from '../../domain/query/query.value';
-import { EventBusValue } from '../../domain/event-bus/event-bus.value';
+import { RedeemBrokerUserCase } from '../../application/redeemBrokerUseCase';
 
+
+export class RedeemController {
+  constructor(
+    private redeemUseCase: RedeemUseCase, 
+    private redeemBrokerUserCase: RedeemBrokerUserCase ) {}
+
+  public insertCtrl= async ({ body }: Request, res: Response) =>{
+    const pointsRedeemed = await this.redeemUseCase.createRedeem(body);
+    
+    if (pointsRedeemed){
+      const redeemPointsQuery = new QueryValue(pointsRedeemed);
+      const brokerMessage = await this.redeemBrokerUserCase.sendMessageBroker(redeemPointsQuery); 
+      console.log('mensage enviado usando el broker ', brokerMessage)
+    } 
+
+    res.status(201).send(pointsRedeemed);
+  }
+}
+
+/*
 export class RedeemController {
   constructor(private redeemUseCase: RedeemUseCase) {
     this.insertCtrl = this.insertCtrl.bind(this);
@@ -23,11 +42,11 @@ export class RedeemController {
         ); // post using Event BUS
       } catch (err) {
         console.log(
-          'err with axios QUERY backend (render new Points)' /*, err*/
+          'err with axios QUERY backend (render new Points)'
         );
         //todo: Logic when you try to redeem and you dont have points enough
       }
     }
     res.status(201).send(redeemAdded);
   }
-}
+}*/
