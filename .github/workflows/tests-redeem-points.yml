@@ -30,11 +30,16 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@v2
-      - run: cd redeem-points && npm install && npm run test:ci
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Waiting to kafka server started
+        run: .github/workflows/wait-for-it.sh localhost 9092 -t 60 -- echo "kafka server ready, testing..."
+
+      - name: Run tests
+        run: cd add-points && npm install && npm run test:ci
         env:
           AWS_DEFAULT_REGION: us-east-1   
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
               
