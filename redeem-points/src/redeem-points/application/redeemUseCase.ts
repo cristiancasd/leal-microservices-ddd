@@ -17,7 +17,6 @@ export class RedeemUseCase {
 
   public createRedeem = async (input: addInput) => {
     const reedemValue = new RedeemValue(input);
-
     const redeemCreated = await this._redeemRepository.createRedeem(
       reedemValue
     );

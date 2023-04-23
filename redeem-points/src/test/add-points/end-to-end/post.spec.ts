@@ -5,24 +5,28 @@ import { connectProducer } from '../../../redeem-points/infrastructure/broker/ka
 
 beforeAll(async () => {
   await connectProducer();
-})
+});
 
-jest.useFakeTimers()
+afterAll(async () => {
+  // await disconnectProducer();
+});
+
+//jest.useFakeTimers()
 
 const data = {
   documentCc: 455554,
-  name: 'katiusca',
+  name: 'post End to End',
   points: 54,
-  detail: 'fsdf',
-  idUser: '2f9d4bb5-d064-4221-925b-4365b1123258'
+  detail: 'puntos por comprar X product',
+  idUser: 'a9e2c4a3-403b-42a1-a716-af09c3cf1e70' // random User to test
 };
 
 const dataErr = {
   d: 455554, //body must have "documentCc"
-  n: 'katiusca', //body must have "name"
+  n: 'post End to End', //body must have "name"
   points: '55lf4', //points must be number
-  de: 'fsdf', //body must have "detail",
-  idUser: 'aasdasda' //idUser must be UUID
+  de: 'fsdf', //body must have "detail"
+  idUser: 455455 // idUser, must be UUID
 };
 
 describe('CREATE REDEEM-POINTS - POST /redeem/create', () => {
@@ -31,19 +35,20 @@ describe('CREATE REDEEM-POINTS - POST /redeem/create', () => {
     expect(response.statusCode).toBe(201);
   });
 
-  it('should be a object', async () => {
+  it('response should do match with data object', async () => {
     const response = await request(app).post('/api/redeem/create').send(data);
-    expect(response.body).toBeInstanceOf(Object);
+    expect(response.body).toBeDefined();
+    expect(response.body).toMatchObject(data);
   });
 
-  it('bada data- should respond with a 400 status code', async () => {
+  it('bad data- should respond with a 400 status code', async () => {
     const response = await request(app)
       .post('/api/redeem/create')
       .send(dataErr);
     expect(response.statusCode).toBe(400);
   });
 
-  it('bada data- should have 4 errors description', async () => {
+  it('bad data- should have 5 errors description', async () => {
     const response = await request(app)
       .post('/api/redeem/create')
       .send(dataErr);

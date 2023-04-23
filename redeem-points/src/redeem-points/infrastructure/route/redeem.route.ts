@@ -9,7 +9,7 @@ import { KafkaRespository } from '../repository/kafka.repository';
 import { MockRepository } from '../repository/mock.repository';
 import { RedeemController } from '../controller/redeem.ctrl';
 
-const route = Router(); 
+const route = Router();
 
 //const addRepo = new MockRepository()      //To use db mock
 const redeemRepo = new DynamoRepository(); //To use db dynamo
@@ -19,9 +19,8 @@ const addBroker = new KafkaRespository(); // To use Kafka as broker
 const redeemUseCase = new RedeemUseCase(redeemRepo);
 const redeemBrokerUseCase = new RedeemBrokerUserCase(addBroker);
 
-
 const redeemCtrl = new RedeemController(redeemUseCase, redeemBrokerUseCase);
- 
+
 route.post(
   `/api/redeem/create`,
   [
