@@ -9,7 +9,7 @@ const MOCK_SCORE = {
 };
 
 export class MockTestRepository implements QueryRepository {
-  async updatePoints(scoreIn: QueryEntity): Promise<any> {
+  async updatePoints(scoreIn: QueryEntity): Promise<QueryEntity> {
     const res = scoreIn;
     return res;
   }

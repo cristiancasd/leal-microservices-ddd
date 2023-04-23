@@ -5,8 +5,8 @@ export class BrokerValue implements BrokerEntity {
   topic: string;
   message: QueryEntity;
 
-  constructor(message :  QueryEntity) {
-    this.topic = "add_created";
+  constructor(message: QueryEntity) {
+    this.topic = 'add_created';
     this.message = message;
   }
 }

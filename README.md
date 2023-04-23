@@ -60,6 +60,12 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 
 ## To test
+
+#### lift the kafka service in a docker container
+```
+docker-compose up -d
+```
+#### Run the tests
 ```
 cd add-points
 npm install

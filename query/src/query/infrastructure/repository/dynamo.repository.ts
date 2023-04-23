@@ -32,7 +32,7 @@ export class DynamoRepository implements QueryRepository {
     return query;
   }
 
-  async getScoreById(documentCc: number): Promise<any | null> {
+  async getScoreById(documentCc: number): Promise<QueryEntity | null> {
     //console.log('buscando ...', id);
     const response = await this._db
       .getItem({
@@ -47,15 +47,15 @@ export class DynamoRepository implements QueryRepository {
     //console.log('response ', response);
     const item = response.Item;
 
-    if (item === undefined) return null;
+    if (!item) return null;
 
-    return {
-      documentCc: item.documentCc.N,
-      score: item.score.N,
-      name: item.name.S,
-      id: item.id.S
-    };
-
-    return item;
+    return item.name.S && item.id.S && item.documentCc.N && item.score.N
+      ? {
+          documentCc: +item.documentCc.N,
+          score: +item.score.N,
+          name: item.name.S,
+          id: item.id.S
+        }
+      : null;
   }
 }

@@ -3,16 +3,9 @@ import { MockTestRepository } from '../../../query/infrastructure/repository/moc
 
 const data = {
   id: 'c13fab4c-93ff-4e6d-b53f-adc8f70be271',
-  documentCc: 4541,
+  documentCc: 4541, //the same document Cc of MOCK db
   name: 'cualquier nombre',
   score: 40
-};
-
-const dataBad = {
-  id: 'c13fab4c-93ff-4e6d-b53f-adc8f70be271',
-  documentCc: 4541,
-  name: 'cualquier nombre',
-  score: 200
 };
 
 describe('UNIT queryUseCase -> GET Score ', () => {
@@ -30,7 +23,7 @@ describe('UNIT queryUseCase -> GET Score ', () => {
     try {
       const res = await getUseCase.getScoreById(7845154);
     } catch (err) {
-      expect(err instanceof Error).toBe(true); //expect(res?.score).toEqual(60) //100 base mock, 40 added
+      expect(err instanceof Error).toBe(true);
     }
   });
 });

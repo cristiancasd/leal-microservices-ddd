@@ -14,14 +14,12 @@ const route = express.Router();
 //const addRepo = new MockRepository()   // To use db Mock
 const addRepo = new DynamoRepository(); // To use db Dynamo
 
-
 const addBroker = new KafkaRespository(); // To use Kafka as broker
-
 
 const addUseCase = new AddUseCase(addRepo);
 const addBrokerUseCase = new AddBrokerUserCase(addBroker);
 
-const addCtrl = new AddController(addUseCase,addBrokerUseCase);
+const addCtrl = new AddController(addUseCase, addBrokerUseCase);
 
 route.post(
   `/api/add/create`,
@@ -35,10 +33,5 @@ route.post(
   validateRequest,
   addCtrl.insertCtrl
 );
-
-route.post('/events', (req, res) => {
-  console.log('Recived Event', req.body.type);
-  res.send({});
-});
 
 export default route;

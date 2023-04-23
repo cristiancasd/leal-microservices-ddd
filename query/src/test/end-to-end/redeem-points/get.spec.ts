@@ -1,24 +1,29 @@
 import { app } from '../../../app';
 
 import request from 'supertest';
+import { MockTestRepository } from '../../../query/infrastructure/repository/mockTest.repository';
+import { UpdateUseCase } from '../../../query/application/updateUseCase';
+import { DynamoRepository } from '../../../query/infrastructure/repository/dynamo.repository';
 
 const data = {
   id: '015dfd5f-7ae7-4837-8f43-58ec19716583',
-  documentCc: 1000,
-  name: 'User test GET',
+  documentCc: 970345,
+  name: 'end to end',
   score: 1
 };
 
 const url = '/api/query/getbyid/';
-const urlAdd = '/api/query/add/';
 
 describe('GET SCORE - GET /api/query/getbyid/', () => {
   it('should respond with a 200 status code ', async () => {
-    const scoreAdded = await request(app).put(urlAdd).send(data).expect(200);
+    const redeemRepo = new DynamoRepository();
+    const updateUseCase = new UpdateUseCase(redeemRepo);
+    const scoreCreated = await updateUseCase.addPoints(data);
+
     const response = await request(app)
       .get(url + data.documentCc)
       .expect(200);
-    expect(+response.body.score).toEqual(scoreAdded.body.score);
+    expect(+response.body.score).toEqual(scoreCreated.score);
   });
 
   it('should respond with a 400 status code (documentCc must be number)', async () => {

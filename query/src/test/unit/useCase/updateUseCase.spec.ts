@@ -4,15 +4,8 @@ import { MockTestRepository } from '../../../query/infrastructure/repository/moc
 const data = {
   id: 'c13fab4c-93ff-4e6d-b53f-adc8f70be271',
   documentCc: 4541,
-  name: 'cualquier nombre',
+  name: 'unit test',
   score: 40
-};
-
-const dataBad = {
-  id: 'c13fab4c-93ff-4e6d-b53f-adc8f70be271',
-  documentCc: 4541,
-  name: 'cualquier nombre',
-  score: 200
 };
 
 describe('UNIT queryUseCase -> Post - Add Points ', () => {
@@ -46,7 +39,7 @@ describe('UNIT queryUseCase -> Post - Redeem Points ', () => {
     const repo = new MockTestRepository(); // To use db Mock
     const updateUseCase = new UpdateUseCase(repo);
     try {
-      const res = await updateUseCase.redeemPoints(dataBad);
+      const res = await updateUseCase.redeemPoints({ ...data, score: 200 }); //the base score of mock is 100
       expect(res?.score).toBeNull();
     } catch (err) {
       expect(err instanceof Error).toBe(true);
