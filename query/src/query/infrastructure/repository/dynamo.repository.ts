@@ -5,8 +5,9 @@ import { DynamoDB } from '../db/dynamo-db';
 export class DynamoRepository implements QueryRepository {
   private readonly _db = DynamoDB.getInstance();
 
-  async updatePoints(query: QueryEntity): Promise<QueryEntity> {
-    await this._db
+  async updatePoints(query: QueryEntity): Promise<QueryEntity | null> {
+    try{
+      await this._db
       .putItem({
         TableName: DynamoDB.TABLE_NAME,
         Item: {
@@ -28,13 +29,20 @@ export class DynamoRepository implements QueryRepository {
         }
       })
       .promise();
-
     return query;
+    }catch(err){
+      return null
+    }
+   
   }
 
-  async getScoreById(documentCc: number): Promise<QueryEntity | null> {
+  async getScoreById(documentCc: number): Promise<QueryEntity | null | string > {
     //console.log('buscando ...', id);
-    const response = await this._db
+    console.log('voy a buscar ',documentCc )
+    
+    
+    try{
+      const response = await this._db
       .getItem({
         TableName: DynamoDB.TABLE_NAME,
         Key: {
@@ -43,13 +51,10 @@ export class DynamoRepository implements QueryRepository {
         // ProjectionExpression: 'documentCc'
       })
       .promise();
-
-    //console.log('response ', response);
-    const item = response.Item;
-
-    if (!item) return null;
-
-    return item.name.S && item.id.S && item.documentCc.N && item.score.N
+      const item = response.Item;
+      if ( !item) return 'Dont exist user, try with other ID';
+      
+      return item.name.S && item.id.S && item.documentCc.N && item.score.N
       ? {
           documentCc: +item.documentCc.N,
           score: +item.score.N,
@@ -57,5 +62,10 @@ export class DynamoRepository implements QueryRepository {
           id: item.id.S
         }
       : null;
+      
+    }catch(err){
+      return null;
+    }
+    
   }
 }

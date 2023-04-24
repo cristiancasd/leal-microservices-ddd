@@ -7,7 +7,9 @@ export class DynamoRepository implements AddRepository {
 
   async createAdd(add: AddEntity): Promise<AddEntity | null> {
     try {
-      await this._db
+      console.log('Repository voy a intentar guardarss en DynamoDB');
+
+      const algo = await this._db
         .putItem({
           TableName: DynamoDB.TABLE_NAME,
           Item: {
@@ -33,7 +35,6 @@ export class DynamoRepository implements AddRepository {
           }
         })
         .promise();
-
       return add;
     } catch (err) {
       return null;

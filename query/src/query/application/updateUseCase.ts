@@ -1,4 +1,5 @@
 import { BadRequestError } from '../domain/errors/bad-request-error';
+import { NotFoundDbError } from '../domain/errors/not-fount-db-error';
 import { QueryRepository } from '../domain/query.repository';
 import { QueryValue } from '../domain/query.value';
 
@@ -20,7 +21,8 @@ export class UpdateUseCase {
     const query = await this._queryRepository.getScoreById(
       inputValue.documentCc
     );
-    if (query) {
+
+    if (query && typeof query !== "string") {
       inputValue.score = +inputValue.score + +query.score;
     }
 
@@ -33,6 +35,8 @@ export class UpdateUseCase {
     const query = await this._queryRepository.getScoreById(
       inputValue.documentCc
     );
+
+    if(typeof query === "string") throw new NotFoundDbError(query);
 
     if (query && +query.score >= inputValue.score) {
       inputValue.score = +query.score - inputValue.score;

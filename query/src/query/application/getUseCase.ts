@@ -1,3 +1,4 @@
+import { DataBaseError } from '../domain/errors/database-error';
 import { NotFoundDbError } from '../domain/errors/not-fount-db-error';
 import { QueryRepository } from '../domain/query.repository';
 
@@ -9,7 +10,8 @@ export class GetUseCase {
 
   public getScoreById = async (documentCc: number) => {
     const query = await this._queryRepository.getScoreById(documentCc);
-    if (query) return query;
-    throw new NotFoundDbError('Dont exist user, try with other ID');
+    if(!query) throw new DataBaseError()
+    if(typeof query === "string") throw new NotFoundDbError(query);
+    return query
   };
 }

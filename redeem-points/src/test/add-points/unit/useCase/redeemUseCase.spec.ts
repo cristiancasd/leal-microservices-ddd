@@ -1,6 +1,6 @@
 import { RedeemUseCase } from '../../../../redeem-points/application/redeemUseCase';
 import { DataBaseError } from '../../../../redeem-points/domain/errors/database-error';
-import { MockTestRepository } from '../../../../redeem-points/infrastructure/repository/mockTest.repository';
+import { MockTestRepository } from '../../../../redeem-points/infrastructure/repository/mockDbTest.repository';
 import { DynamoRepositoryError } from '../../../setup';
 
 const data = {
@@ -31,7 +31,7 @@ describe('UNIT redeemUseCase - createRedeem ', () => {
     const redeemUseCase = new RedeemUseCase(redeemRepo);
     try {
       const res = await redeemUseCase.createRedeem(data);
-      expect(res).toBeNull();
+      expect(res?.documentCc).toEqual('itsToBeShureThatExpectTheErrorCatch');
     } catch (err) {
       expect(err).toBeInstanceOf(DataBaseError);
     }

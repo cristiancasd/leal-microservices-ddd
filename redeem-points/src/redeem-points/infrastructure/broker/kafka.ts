@@ -1,7 +1,11 @@
 import { Kafka } from 'kafkajs';
 
 //It is a service that hosts a topic, each broker is identify for a unique ID
-const brokers = ['0.0.0.0:9092']; // enter to Docker container and look for Ports
+// enter to Docker container and look for Ports
+const brokers =
+  process.env.NODE_ENV === 'production' || 'development'
+    ? ['0.0.0.0:9092']
+    : ['0.0.0.0:9093'];
 
 const kafka = new Kafka({
   clientId: 'redeem-points-app',
@@ -12,7 +16,7 @@ export const producer = kafka.producer();
 
 export async function connectProducer() {
   await producer.connect();
-  console.log('Producer connected');
+  console.log('Producer connected, port: ', brokers);
 }
 
 export async function disconnectProducer() {

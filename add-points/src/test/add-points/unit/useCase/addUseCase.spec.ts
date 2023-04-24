@@ -32,7 +32,7 @@ describe('UNIT addUseCase - createAdd ', () => {
     const addUseCase = new AddUseCase(addRepo);
     try {
       const res = await addUseCase.createAdd(data);
-      expect(res).toBeNull();
+      expect(res?.documentCc).toEqual('itsToBeShureThatExpectTheErrorCatch');
     } catch (err) {
       expect(err).toBeInstanceOf(DataBaseError);
     }

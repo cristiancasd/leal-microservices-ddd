@@ -7,13 +7,10 @@ export class AddBrokerUserCase {
   constructor(private readonly _brokerRepository: BrokerRepository) {}
   public sendMessageBroker = async (message: QueryEntity) => {
     const brokerValue = new BrokerValue(message);
-    try {
-      const addCreated = await this._brokerRepository.sendMessageBroker(
-        brokerValue
-      );
-      return addCreated;
-    } catch (err) {
-      throw new BrokerError();
-    }
+    const addCreated = await this._brokerRepository.sendMessageBroker(
+      brokerValue
+    );
+    if (addCreated) return addCreated;
+    throw new BrokerError();
   };
 }

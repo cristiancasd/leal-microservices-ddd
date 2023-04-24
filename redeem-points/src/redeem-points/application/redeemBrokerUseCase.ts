@@ -7,13 +7,12 @@ export class RedeemBrokerUserCase {
   constructor(private readonly _brokerRepository: BrokerRepository) {}
   public sendMessageBroker = async (message: QueryEntity) => {
     const brokerValue = new BrokerValue(message);
-    try {
-      const redeemCreated = await this._brokerRepository.sendMessageBroker(
-        brokerValue
-      );
-      return redeemCreated;
-    } catch (err) {
-      throw new BrokerError();
-    }
+
+    const redeemCreated = await this._brokerRepository.sendMessageBroker(
+      brokerValue
+    );
+
+    if (redeemCreated) return redeemCreated;
+    throw new BrokerError();
   };
 }

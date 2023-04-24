@@ -1,5 +1,5 @@
 import { DynamoRepository } from '../../../../redeem-points/infrastructure/repository/dynamo.repository';
-import { MockTestRepository } from '../../../../redeem-points/infrastructure/repository/mockTest.repository';
+import { MockTestRepository } from '../../../../redeem-points/infrastructure/repository/mockDbTest.repository';
 import { DynamoRepositoryError } from '../../../setup';
 
 const data = {

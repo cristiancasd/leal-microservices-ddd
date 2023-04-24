@@ -6,6 +6,8 @@ export class QueryFromBrokerController {
 
   public addPointsFromBroker = async (data: QueryEntity) => {
     await this.updateUseCase.addPoints(data);
+  
+  
   };
 
   public redeemPointsFromBroker = async (body: QueryEntity) => {

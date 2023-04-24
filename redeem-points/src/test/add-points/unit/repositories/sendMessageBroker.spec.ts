@@ -27,16 +27,14 @@ const message = {
 describe('UNIT Respository KAFKA -> sendMessageBroker', () => {
   it('should return a object BrokerEntity when I send a message to Kafka', async () => {
     const repo = new KafkaRespository();
-    const brokerValue = new BrokerValue(data);
-    const messageSended = await repo.sendMessageBroker(brokerValue);
+    const messageSended = await repo.sendMessageBroker(message);
     expect(messageSended).toMatchObject(message);
   });
 
   it('should return Null if the producer is disconect', async () => {
     await disconnectProducer();
     const repo = new KafkaRespository();
-    const brokerValue = new BrokerValue(data);
-    const messageSended = await repo.sendMessageBroker(brokerValue);
+    const messageSended = await repo.sendMessageBroker(message);
     expect(messageSended).toBeNull();
   });
 });

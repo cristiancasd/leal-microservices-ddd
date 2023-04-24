@@ -6,12 +6,12 @@ import { consumer } from './kafka';
 
 const redeemRepo = new DynamoRepository(); //to use db dynamoDB
 const updateUseCase = new UpdateUseCase(redeemRepo);
-const queryCtrl = new QueryFromBrokerController(updateUseCase);
+const queryBrokerCtrl = new QueryFromBrokerController(updateUseCase);
 
 export const listenBroker = async () => {
   const topicToSubscribe: Record<string, Function> = {
-    add_created: queryCtrl.addPointsFromBroker,
-    redeem_created: queryCtrl.redeemPointsFromBroker
+    add_created: queryBrokerCtrl.addPointsFromBroker,
+    redeem_created: queryBrokerCtrl.redeemPointsFromBroker
   };
 
   interface InputKafka {

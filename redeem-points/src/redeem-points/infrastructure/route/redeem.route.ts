@@ -6,7 +6,7 @@ import { RedeemUseCase } from '../../application/redeemUseCase';
 import { validateRequest } from '../middlewares/validate-request';
 import { DynamoRepository } from '../repository/dynamo.repository';
 import { KafkaRespository } from '../repository/kafka.repository';
-import { MockRepository } from '../repository/mock.repository';
+import { MockRepository } from '../repository/mockDb.repository';
 import { RedeemController } from '../controller/redeem.ctrl';
 
 const route = Router();
@@ -33,11 +33,5 @@ route.post(
   validateRequest,
   redeemCtrl.insertCtrl
 );
-
-/*
-route.post('/events', (req, res) => {
-  console.log('Received Event', req.body.type);
-  res.send({});
-});*/
 
 export default route;

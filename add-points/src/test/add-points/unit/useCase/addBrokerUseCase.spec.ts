@@ -43,7 +43,7 @@ describe('UNIT addBrokerUseCase -> sendMessageBroker', () => {
     const addBrokerUseCase = new AddBrokerUserCase(addBroker);
     try {
       const res = await addBrokerUseCase.sendMessageBroker(data);
-      expect(res).toBeNull();
+      expect(res?.topic).toEqual('itsToBeShureThatExpectTheErrorCatch');
     } catch (err) {
       expect(err).toBeInstanceOf(BrokerError);
     }

@@ -1,7 +1,8 @@
+import { DataBaseError } from '../domain/errors/database-error';
 import { RedeemRepository } from '../domain/redeem/redeem.repository';
 import { RedeemValue } from '../domain/redeem/redeem.value';
 
-interface addInput {
+interface redeemInput {
   documentCc: number;
   name: string;
   points: number;
@@ -10,16 +11,13 @@ interface addInput {
 }
 
 export class RedeemUseCase {
-  private readonly _redeemRepository: RedeemRepository;
-  constructor(redeemRepository: RedeemRepository) {
-    this._redeemRepository = redeemRepository;
-  }
-
-  public createRedeem = async (input: addInput) => {
-    const reedemValue = new RedeemValue(input);
+  constructor(private readonly _redeemRepository: RedeemRepository) {}
+  public createRedeem = async (input: redeemInput) => {
+    const redeemValue = new RedeemValue(input);
     const redeemCreated = await this._redeemRepository.createRedeem(
-      reedemValue
+      redeemValue
     );
-    return redeemCreated;
+    if (redeemCreated) return redeemCreated;
+    throw new DataBaseError();
   };
 }
