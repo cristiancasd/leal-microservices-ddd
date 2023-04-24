@@ -10,8 +10,8 @@ export class GetUseCase {
 
   public getScoreById = async (documentCc: number) => {
     const query = await this._queryRepository.getScoreById(documentCc);
-    if(!query) throw new DataBaseError()
-    if(typeof query === "string") throw new NotFoundDbError(query);
-    return query
+    if (!query) throw new DataBaseError();
+    if (typeof query === 'string') throw new NotFoundDbError(query);
+    return query;
   };
 }

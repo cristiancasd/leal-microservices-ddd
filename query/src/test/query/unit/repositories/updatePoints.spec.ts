@@ -1,5 +1,5 @@
-import { DynamoRepository } from '../../../query/infrastructure/repository/dynamo.repository';
-import { MockTestRepository } from '../../../query/infrastructure/repository/mockTest.repository';
+import { DynamoRepository } from '../../../../query/infrastructure/repository/dynamo.repository';
+import { MockTestRepository } from '../../../../query/infrastructure/repository/mockTest.repository';
 
 const data = {
   id: 'c13fab4c-93ff-4e6d-b53f-adc8f70be271',

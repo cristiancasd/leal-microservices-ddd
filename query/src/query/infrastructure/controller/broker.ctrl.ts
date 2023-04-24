@@ -5,12 +5,20 @@ export class QueryFromBrokerController {
   constructor(private updateUseCase: UpdateUseCase) {}
 
   public addPointsFromBroker = async (data: QueryEntity) => {
-    await this.updateUseCase.addPoints(data);
-  
-  
+    try {
+      await this.updateUseCase.addPoints(data);
+    } catch (error: any) {
+      //todo: action when is not possible add points 
+      console.error(error.message);
+    }
   };
 
   public redeemPointsFromBroker = async (body: QueryEntity) => {
-    await this.updateUseCase.redeemPoints(body);
+    try {
+      await this.updateUseCase.redeemPoints(body);
+    } catch (error: any) {
+      //todo: action when is not possible redeem points
+      console.error(error.message);
+    }
   };
 }

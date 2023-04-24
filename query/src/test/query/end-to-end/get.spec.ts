@@ -18,12 +18,18 @@ describe('GET SCORE - GET /api/query/getbyid/', () => {
   it('should respond with a 200 status code ', async () => {
     const redeemRepo = new DynamoRepository();
     const updateUseCase = new UpdateUseCase(redeemRepo);
-    const scoreCreated = await updateUseCase.addPoints(data);
-
-    const response = await request(app)
+    await updateUseCase.addPoints(data);
+    await request(app)
       .get(url + data.documentCc)
       .expect(200);
-    expect(+response.body.score).toEqual(scoreCreated.score);
+  });
+
+  it('should have the same score (response query and data just upload) ', async () => {
+    const redeemRepo = new DynamoRepository();
+    const updateUseCase = new UpdateUseCase(redeemRepo);
+    const scoreCreated = await updateUseCase.addPoints(data);
+    const response = await request(app).get(url + data.documentCc);
+    scoreCreated && expect(+response.body.score).toEqual(scoreCreated.score);
   });
 
   it('should respond with a 400 status code (documentCc must be number)', async () => {

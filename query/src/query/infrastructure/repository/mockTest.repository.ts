@@ -14,8 +14,10 @@ export class MockTestRepository implements QueryRepository {
     return res;
   }
 
-  async getScoreById(documentCc: number): Promise<QueryEntity | null> {
+  async getScoreById(documentCc: number): Promise<QueryEntity | string> {
     const res = MOCK_SCORE;
-    return documentCc === MOCK_SCORE.documentCc ? { ...res, documentCc } : null;
+    return documentCc === MOCK_SCORE.documentCc
+      ? { ...res, documentCc }
+      : 'User dont have data';
   }
 }

@@ -27,8 +27,6 @@ export const listenBroker = async () => {
 
       const handler = topicToSubscribe[input.topic];
       if (handler) {
-        console.log('llegó el kafka con info ', data);
-        //handler(data);
         handler(data);
       }
     }

@@ -1,9 +1,4 @@
-import { Kafka, KafkaMessage } from 'kafkajs';
-//import { topicToSubscribe } from "./routes";
-
-import { UpdateUseCase } from '../../application/updateUseCase';
-import { QueryFromBrokerController } from '../controller/broker.ctrl';
-import { DynamoRepository } from '../repository/dynamo.repository';
+import { Kafka } from 'kafkajs';
 
 const brokers = ['0.0.0.0:9092'];
 
@@ -21,14 +16,6 @@ export async function disconnectConsumer() {
   console.log('Disconnected from consumer');
 }
 
-/*
-interface InputKafka{
-    topic: string;
-    partition: number;
-    message: KafkaMessage
-}
-*/
-
 const topics = ['add_created', 'redeem_created'] as const;
 
 export async function connectConsumer() {
@@ -43,31 +30,4 @@ export async function connectConsumer() {
       fromBeginning: true
     });
   }
-  /*
-  await consumer.run({
-    eachMessage: async (input:InputKafka) => {
-      if (!input.message || !input.message.value) return;
-      const data = JSON.parse(input.message.value.toString());
-      console.log('llegó INICIO el kafka con info ', data)
-
-      const handler = topicToSubscribe[input.topic];
-      console.log('handler ', handler)
-      if (handler) {
-        console.log('llegó el kafka con info ', data)
-        //handler(data);
-        handler(data);
-      }
-    },
-  });*/
 }
-
-/*
-
-const redeemRepo = new DynamoRepository(); //to use db dynamoDB
-const updateUseCase = new UpdateUseCase(redeemRepo);
-const queryCtrl = new QueryFromBrokerController(updateUseCase);
-
-
-export const topicToSubscribe: Record<string, Function> = {
-  'add_created': queryCtrl.addPointsFromBroker,
-};*/
