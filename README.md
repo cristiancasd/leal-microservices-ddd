@@ -15,7 +15,9 @@ Services:
 - Front: Using hooks and redux(easy scalable code)
 
 <img src="/images-doc/architectureImg.jpg" alt="Architecture" >
-<img src="/images-doc/servicesImg.jpg" alt="Services" >
+<img src="/images-doc/routesServicesImg.jpg" alt="Routes Services" >
+<img src="/images-doc/brokerServicesImg.jpg" alt="Broker Services" >
+
 <img src="/images-doc/tablesDbImg.jpg" alt="Data Base">
 <img src="/images-doc/frontImg.jpg" alt="Front React App">
 
@@ -56,7 +58,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 6. default users to use (loging CC)
 	- 1234
 	- 4444
-
 
 
 ## To test
