@@ -5,7 +5,9 @@ import { Kafka } from 'kafkajs';
 // enter to Docker container and look for Ports
 const brokers =
   process.env.NODE_ENV === 'production' || 'development'
-    ? ['0.0.0.0:9092']
+    ? process.env.BROKER_SERVICE_NAME
+      ? [process.env.BROKER_SERVICE_NAME]
+      : ['0.0.0.0:9092']
     : ['0.0.0.0:9093'];
 
 const kafka = new Kafka({

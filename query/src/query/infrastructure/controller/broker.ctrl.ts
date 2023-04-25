@@ -1,5 +1,5 @@
 import { UpdateUseCase } from '../../application/updateUseCase';
-import { QueryEntity } from '../../../../../redeem-points/src/redeem-points/domain/query/query.entity';
+import { QueryEntity } from '../../domain/query.entity';
 
 export class QueryFromBrokerController {
   constructor(private updateUseCase: UpdateUseCase) {}
@@ -8,7 +8,7 @@ export class QueryFromBrokerController {
     try {
       await this.updateUseCase.addPoints(data);
     } catch (error: any) {
-      //todo: action when is not possible add points 
+      //todo: action when is not possible add points
       console.error(error.message);
     }
   };

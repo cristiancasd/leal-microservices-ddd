@@ -1,6 +1,8 @@
 import { Kafka } from 'kafkajs';
 
-const brokers = ['0.0.0.0:9092'];
+const brokers = process.env.BROKER_SERVICE_NAME
+  ? [process.env.BROKER_SERVICE_NAME]
+  : ['0.0.0.0:9092'];
 
 const kafka = new Kafka({
   brokers,
