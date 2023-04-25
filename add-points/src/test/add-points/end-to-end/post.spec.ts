@@ -7,7 +7,7 @@ import {
 } from '../../../add-points/infrastructure/broker/kafka';
 
 beforeAll(async () => {
-  await connectProducer();
+  await connectProducer(); 
 });
 
 afterAll(async () => {

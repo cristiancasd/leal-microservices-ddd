@@ -7,7 +7,7 @@
     "start": "cross-env KAFKAJS_NO_PARTITIONER_WARNING=1 cross-env NODE_ENV=production ts-node-dev src/index.ts",
     "test": "cross-env KAFKAJS_NO_PARTITIONER_WARNING=1  cross-env NODE_ENV=test jest --watchAll --no-cache --detectOpenHandles",
     "testcriss": "cross-env KAFKAJS_NO_PARTITIONER_WARNING=1  cross-env NODE_ENV=test  jest --verbose --silent -no-cache --detectOpenHandles",
-    "test:ci": " cross-env KAFKAJS_NO_PARTITIONER_WARNING=1  cross-env NODE_ENV=test jest --no-cache --detectOpenHandles",
+    "test:ci": " cross-env KAFKAJS_NO_PARTITIONER_WARNING=1  cross-env NODE_ENV=test jest --maxWorkers=2 --no-cache --detectOpenHandles",
     "format": "npx prettier --write ."
   },
   "jest": {

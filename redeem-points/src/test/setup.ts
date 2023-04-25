@@ -9,7 +9,7 @@ jest.setTimeout(100000);
 afterAll(async () => {
   await disconnectProducer();
 });
-
+ 
 export class DynamoRepositoryError implements RedeemRepository {
   private readonly _db = DynamoDB.getInstance();
 

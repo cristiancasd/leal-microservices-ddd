@@ -1,9 +1,6 @@
 import { AddEntity } from '../add-points/domain/addPoints/add.entity';
 import { AddRepository } from '../add-points/domain/addPoints/add.repository';
-import {
-  connectProducer,
-  disconnectProducer
-} from '../add-points/infrastructure/broker/kafka';
+import {disconnectProducer} from '../add-points/infrastructure/broker/kafka';
 import { DynamoDB } from '../add-points/infrastructure/db/dynamo-db';
 
 //todo: delete all data by table after tests.
