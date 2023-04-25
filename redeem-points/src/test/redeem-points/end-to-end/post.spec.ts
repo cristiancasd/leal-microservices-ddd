@@ -4,7 +4,7 @@ import request from 'supertest';
 import { connectProducer } from '../../../redeem-points/infrastructure/broker/kafka';
 
 beforeAll(async () => {
-  await connectProducer();
+  await connectProducer(); 
 });
 
 afterAll(async () => {
@@ -42,16 +42,12 @@ describe('CREATE REDEEM-POINTS - POST /redeem/create', () => {
   });
 
   it('bad data- should respond with a 400 status code', async () => {
-    const response = await request(app)
-      .post('/api/redeem/create')
-      .send(dataErr);
+    const response = await request(app).post('/api/redeem/create').send(dataErr);
     expect(response.statusCode).toBe(400);
   });
 
   it('bad data- should have 5 errors description', async () => {
-    const response = await request(app)
-      .post('/api/redeem/create')
-      .send(dataErr);
+    const response = await request(app).post('/api/redeem/create').send(dataErr);
     expect(response.body).toBeInstanceOf(Object);
     expect(response.body.errors).toBeDefined();
     expect(response.body.errors).toBeInstanceOf(Array);

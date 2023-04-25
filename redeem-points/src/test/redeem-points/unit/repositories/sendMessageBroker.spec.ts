@@ -1,4 +1,3 @@
-import { BrokerValue } from '../../../../redeem-points/domain/broker/broker.value';
 import {
   connectProducer,
   disconnectProducer
@@ -7,7 +6,7 @@ import { KafkaRespository } from '../../../../redeem-points/infrastructure/repos
 
 beforeAll(async () => {
   await connectProducer();
-});
+}); 
 
 afterAll(async () => {
   //await disconnectProducer();

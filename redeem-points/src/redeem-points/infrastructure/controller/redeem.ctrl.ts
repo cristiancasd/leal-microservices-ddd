@@ -12,7 +12,6 @@ export class RedeemController {
   public insertCtrl = async ({ body }: Request, res: Response) => {
     const pointsRedeemed = await this.redeemUseCase.createRedeem(body);
 
-    res.status(201).send(pointsRedeemed);
 
     if (pointsRedeemed) {
       const redeemPointsQuery = new QueryValue(pointsRedeemed);
@@ -21,5 +20,8 @@ export class RedeemController {
       );
       console.log('mensage enviado usando el broker ', brokerMessage);
     }
+
+    res.status(201).send(pointsRedeemed);
+
   };
 }

@@ -1,15 +1,13 @@
 import { AddBrokerUserCase } from '../../../../add-points/application/addBrokerUseCase';
-import { CustomError } from '../../../../add-points/domain/errors/custom-error';
 import { BrokerError } from '../../../../add-points/domain/errors/broker-error';
-import { BadRequestError } from '../../../../add-points/domain/errors/bad-request-error';
 
 import {
-  connectProducer,
+  connectProducer, 
   disconnectProducer
 } from '../../../../add-points/infrastructure/broker/kafka';
 import { KafkaRespository } from '../../../../add-points/infrastructure/repository/kafka.repository';
 
-beforeAll(async () => {
+beforeAll(async () => { 
   await connectProducer();
 });
 

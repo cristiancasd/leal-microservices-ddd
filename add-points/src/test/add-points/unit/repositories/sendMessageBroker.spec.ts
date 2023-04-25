@@ -1,4 +1,3 @@
-import { BrokerValue } from '../../../../add-points/domain/broker/broker.value';
 import {
   connectProducer,
   disconnectProducer
