@@ -7,7 +7,9 @@ Services:
 -- (add-points | redeem-points | query): Typescript
 -- Event-bus: JavaScrip
 
-- Handler error implemented
+DataBase: DynamoDB
+
+- Handler error implemented (custom errors)
 - github actions: workflows implemented to have a main branch secure
 - prettier: To have good practices
 - Infra |sakaffold ingress-nginx implemented (easy development and deployment)
@@ -48,7 +50,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 127.0.0.1 myleal.com
 ```
 
-4. In the root of the project
+4. In the root of the project (you must installed)
 ```sakffold dev```
 
 5. In your browseropen : http://myleal.com
