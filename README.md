@@ -5,7 +5,7 @@
 Architecture: DDD
 Services: 
 -- (add-points | redeem-points | query): Typescript
--- Event-bus: JavaScrip
+-- Broker: Kafka
 
 - Handler error implemented
 - github actions: workflows implemented to have a main branch secure
