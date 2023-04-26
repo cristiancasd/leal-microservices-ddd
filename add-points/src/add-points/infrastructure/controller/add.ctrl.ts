@@ -17,4 +17,4 @@ export class AddController {
     }
     res.status(201).send(pointsAdded);
   };
-} 
+}

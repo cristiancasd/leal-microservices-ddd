@@ -22,7 +22,7 @@ const topics = ['add_created', 'redeem_created'] as const;
 
 export async function connectConsumer() {
   await consumer.connect();
-  console.log('Connected to consumer');
+  console.log('Connected to consumer ', brokers);
 
   for (let i = 0; i < topics.length; i++) {
     console.log('subscribing topic: ', topics[i]);

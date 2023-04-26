@@ -9,7 +9,7 @@ describe('authSlice test', () => {
     expect(authSlice.name).toBe('auth');
   });
 
-  it('Should assign the "authenticated" status and define the user', () => {
+  it('onLogin - Should assign the "authenticated" status and define the user', () => {
     const state = authSlice.reducer(initialState, onLogin(demoUser));
     expect(state).toEqual({
       status: 'authenticated', // 'checking', 'not-authenticated', 'authenticated'
@@ -22,7 +22,7 @@ describe('authSlice test', () => {
     });
   });
 
-  it('should do the logout without arguments', () => {
+  it('onLogout - should do the logout without arguments', () => {
     const state = authSlice.reducer(authenticatedState, onLogout());
     expect(state).toEqual({
       status: 'not-authenticated',
@@ -31,7 +31,7 @@ describe('authSlice test', () => {
     });
   });
 
-  it('should do the logout and assign the error message', () => {
+  it('onLogout - should do the logout and assign the error message', () => {
     // authenticatedState // logout con argumentos
     const errorMessage = 'Credenciales no son correctas';
 
@@ -43,7 +43,7 @@ describe('authSlice test', () => {
     });
   });
 
-  it('should change the status to "checking"', () => {
+  it('checkingCredentials - should change the status to "checking"', () => {
     const state = authSlice.reducer(authenticatedState, checkingCredentials());
     expect(state.status).toBe('checking');
   });

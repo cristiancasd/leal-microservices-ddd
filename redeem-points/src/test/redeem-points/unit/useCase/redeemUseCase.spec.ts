@@ -2,7 +2,7 @@ import { RedeemUseCase } from '../../../../redeem-points/application/redeemUseCa
 import { DataBaseError } from '../../../../redeem-points/domain/errors/database-error';
 import { MockTestRepository } from '../../../../redeem-points/infrastructure/repository/mockDbTest.repository';
 import { DynamoRepositoryError } from '../../../setup';
- 
+
 const data = {
   documentCc: 455554,
   name: 'redeemUseCase',

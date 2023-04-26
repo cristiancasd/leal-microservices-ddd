@@ -7,15 +7,18 @@ import {
   setIsCommunicating,
   setSuccessMessage,
 } from '../common/commonSlice';
-import { onGetScore, onNewUserScore, onPointsAdded, onPointsRedeem } from './pointsSlice';
+import { setScoreData } from './pointsSlice';
+//import { onGetScore, onNewUserScore, onPointsAdded, onPointsRedeem } from './pointsSlice';
 
 export const startAddPoints = (dataAdd) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(setIsCommunicating(true));
     try {
+      const { scoreData } = getState().points;
       const { data } = await lealAddApi.post('/add/create', dataAdd);
-      dispatch(onPointsAdded(data));
-      dispatch(setSuccessMessage(`Points Added: ${data.points}`));
+      const newScore = +scoreData.score + +data.points;
+      dispatch(setScoreData({ ...scoreData, score: newScore }));
+      dispatch(setSuccessMessage(`Points Added: ${data.points} | New Score: ${newScore}`));
       setTimeout(() => {
         dispatch(clearSuccessMessage());
       }, 10);
@@ -31,12 +34,16 @@ export const startAddPoints = (dataAdd) => {
 };
 
 export const startRedeemPoints = (dataRedeem) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(setIsCommunicating(true));
     try {
+      const { scoreData } = getState().points;
+
       const { data } = await lealRedeemApi.post('/redeem/create', dataRedeem);
-      dispatch(onPointsRedeem(data));
-      dispatch(setSuccessMessage(`Points Redeem: ${data.points}`));
+      const newScore = +scoreData.score + -+data.points;
+      dispatch(setScoreData({ ...scoreData, score: newScore }));
+
+      dispatch(setSuccessMessage(`Points Redeemed: ${data.points} | New Score: ${newScore}`));
       setTimeout(() => {
         dispatch(clearSuccessMessage());
       }, 10);
@@ -52,17 +59,20 @@ export const startRedeemPoints = (dataRedeem) => {
 };
 
 export const startGetPoints = (documentCc) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(setIsCommunicating(true));
     try {
       const { data } = await lealQueryApi.get('/query/getbyid/' + documentCc);
-      dispatch(onGetScore(data));
+      dispatch(setScoreData(data));
       dispatch(setSuccessMessage(`My score: ${data.score}`));
       setTimeout(() => {
         dispatch(clearSuccessMessage());
       }, 10);
     } catch (error) {
-      dispatch(setSuccessMessage(`My score: 0`));
+      dispatch(setErrorMessage(`My score: Error getting score`));
+      setTimeout(() => {
+        dispatch(clearErrorMessage(undefined));
+      }, 10);
     }
     dispatch(setIsCommunicating(false));
   };
@@ -73,7 +83,7 @@ export const startGetInitalPoints = (documentCc) => {
     dispatch(setIsCommunicating(true));
     try {
       const { data } = await lealQueryApi.get('/query/getbyid/' + documentCc);
-      dispatch(onGetScore(data));
+      dispatch(setScoreData(data));
     } catch (error) {
       const { user } = getState().auth;
       const newScoreUser = {
@@ -82,7 +92,7 @@ export const startGetInitalPoints = (documentCc) => {
         score: 0,
         documentCc: user.documentCc,
       };
-      dispatch(onNewUserScore(newScoreUser));
+      dispatch(setScoreData(newScoreUser));
       const errorMessage = existError(error);
       dispatch(setErrorMessage(errorMessage));
       setTimeout(() => {

@@ -11,7 +11,7 @@ export class KafkaRespository implements BrokerRepository {
       });
       return data;
     } catch (err) {
-      return null; 
+      return null;
     }
   }
 }

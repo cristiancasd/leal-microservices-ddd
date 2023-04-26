@@ -1,7 +1,7 @@
 import { findUserByDocumentCc } from '../../../src/helpers/findUserByDocumentCc';
 import { checkingCredentials, onLogin, onLogout } from '../../../src/store/auth/authSlice';
 import { startLogin, startLogout } from '../../../src/store/auth/thunks';
-import { onResetPoints } from '../../../src/store/points/pointsSlice';
+import { onResetScoreData } from '../../../src/store/points/pointsSlice';
 import { demoUser } from '../../fixtures/authFixtures';
 
 jest.mock('../../../src/helpers/findUserByDocumentCc');
@@ -26,10 +26,10 @@ describe('AuthThunks Tests', () => {
     expect(dispatch).toHaveBeenCalledWith(onLogout(loginData.error));
   });
 
-  it('startLogout should call checkingCredentials, onLogout and onResetPoints', async () => {
+  it('startLogout should call checkingCredentials, onLogout and onResetScoreData', async () => {
     await startLogout()(dispatch);
     expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
     expect(dispatch).toHaveBeenCalledWith(onLogout());
-    expect(dispatch).toHaveBeenCalledWith(onResetPoints());
+    expect(dispatch).toHaveBeenCalledWith(onResetScoreData());
   });
 });

@@ -7,7 +7,7 @@ import {
 } from '../../../add-points/infrastructure/broker/kafka';
 
 beforeAll(async () => {
-  await connectProducer(); 
+  await connectProducer();
 });
 
 afterAll(async () => {
@@ -57,4 +57,3 @@ describe('CREATE ADD-POINTS - POST /add/create', () => {
     expect(response.body.errors.length).toEqual(5);
   });
 });
- 

@@ -1,5 +1,5 @@
 import { findUserByDocumentCc } from '../../helpers/findUserByDocumentCc';
-import { onResetPoints } from '../points/pointsSlice';
+import { onResetScoreData } from '../points/pointsSlice';
 import { checkingCredentials, onLogin, onLogout, setErrorMessageAuth } from './authSlice';
 
 export const startLogin = ({ documentCc }) => {
@@ -63,7 +63,7 @@ export const checkDocumentCc = () => {
 export const startLogout = () => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
-    dispatch(onResetPoints());
+    dispatch(onResetScoreData());
     localStorage.clear();
     dispatch(onLogout());
   };
