@@ -6,7 +6,7 @@ import {
 } from '../../../../redeem-points/infrastructure/broker/kafka';
 import { KafkaRespository } from '../../../../redeem-points/infrastructure/repository/kafka.repository';
 
-beforeAll(async () => { 
+beforeAll(async () => {
   await connectProducer();
 });
 

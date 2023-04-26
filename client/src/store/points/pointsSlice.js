@@ -5,15 +5,26 @@ const initialScore = {
   documentCc: '',
   score: 0,
 };
+
 export const pointsSlice = createSlice({
   name: 'points',
 
   initialState: {
     scoreData: initialScore,
+    /*scoreData: initialScore,
     pointsAdded: undefined,
-    pointsRedeem: undefined,
+    pointsRedeem: undefined,*/
   },
+
   reducers: {
+    setScoreData: (state, { payload }) => {
+      state.scoreData = payload;
+    },
+
+    onResetScoreData: (state, { payload }) => {
+      state.scoreData = undefined;
+    },
+    /*
     onPointsAdded: (state, { payload }) => {
       state.scoreData = { ...state.scoreData, score: +state.scoreData.score + +payload.points };
       state.pointsAdded = payload;
@@ -37,14 +48,13 @@ export const pointsSlice = createSlice({
       state.pointsAdded = undefined;
       state.pointsRedeem = undefined;
     },
-
-    onResetPoints: (state, { payload }) => {
-      state.scoreData = undefined;
-      state.pointsAdded = undefined;
-      state.pointsRedeem = undefined;
-    },
+*/
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { onPointsAdded, onPointsRedeem, onGetScore, onNewUserScore, onResetPoints } = pointsSlice.actions;
+export const {
+  setScoreData,
+  onResetScoreData,
+  /*onPointsAdded, onPointsRedeem, onGetScore, onNewUserScore,  */
+} = pointsSlice.actions;

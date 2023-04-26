@@ -22,11 +22,15 @@ export const listenBroker = async () => {
 
   await consumer.run({
     eachMessage: async (input: InputKafka) => {
+      console.log('arrive message ', input.topic);
+
       if (!input.message || !input.message.value) return;
       const data = JSON.parse(input.message.value.toString());
 
       const handler = topicToSubscribe[input.topic];
       if (handler) {
+        console.log('arrive message with topic : ', input.topic);
+
         handler(data);
       }
     }

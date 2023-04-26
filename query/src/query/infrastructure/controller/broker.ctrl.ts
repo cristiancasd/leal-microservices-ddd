@@ -7,6 +7,7 @@ export class QueryFromBrokerController {
   public addPointsFromBroker = async (data: QueryEntity) => {
     try {
       await this.updateUseCase.addPoints(data);
+      console.log('score updated in db');
     } catch (error: any) {
       //todo: action when is not possible add points
       console.error(error.message);
@@ -16,6 +17,7 @@ export class QueryFromBrokerController {
   public redeemPointsFromBroker = async (body: QueryEntity) => {
     try {
       await this.updateUseCase.redeemPoints(body);
+      console.log('score updated in db');
     } catch (error: any) {
       //todo: action when is not possible redeem points
       console.error(error.message);
