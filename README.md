@@ -33,31 +33,6 @@
 	- Create a Dynamo table named leal-add-points-testing with partition key  (id:string)
 	- Create a Dynamo table named leal-redeem-points-testing with partition key  (id:string)
 
-## Use App in kubernetes (Docker-deskpot)
-
-1. define you env variables
-```
-kubectl create secret generic aws-id-secret --from-literal=AWS_ACCESS_KEY_ID=<your data>
-kubectl create secret generic aws-key-secret --from-literal=AWS_SECRET_ACCESS_KEY=<your data>
-```
-
-2. If you dont have ingress-ngix
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
-```
-3. Define in your hosts file
-```
-127.0.0.1 myleal.com
-```
-
-4. In the root of the project
-```sakffold dev```
-
-5. In your browseropen : http://myleal.com
-
-6. default users to use (loging CC)
-	- 1234
-	- 4444
 
 
 ## To test
