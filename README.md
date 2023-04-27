@@ -1,14 +1,14 @@
 
-
 # Leal APP
 
-Architecture: DDD
-Services: 
--- (add-points | redeem-points | query): Typescript
--- Broker: Kafka
+#### Architecture: DDD
+#### Services: 
+- (add-points | redeem-points | query): Typescript
+- Broker: Kafka
 
-- Handler error implemented
-- github actions: workflows implemented to have a main branch secure
+#### Others
+- Handler error implemented (customs error)
+- github actions: workflows implemented to do the merge before merging branches
 - prettier: To have good practices
 - Infra |sakaffold ingress-nginx implemented (easy development and deployment)
 - Testing: Jest
@@ -82,6 +82,11 @@ cd query
 npm install
 npm test
 ```
+```
+cd client
+yarn install
+yarn test
+```
 
 ## To use locally
 
@@ -93,18 +98,12 @@ npm test
 > change the ``.env.template`` to ``.env`` (fillout the missing data)
 > ``npm start``
 
-
 cd redeem-points
 > ``npm install``
 > change the ``.env.template`` to ``.env`` (fillout the missing data)
 > ``npm start``
 
 cd query
-> ``npm install``
-> change the ``.env.template`` to ``.env`` (fillout the missing data)
-> ``npm start``
-
-cd event-bus
 > ``npm install``
 > change the ``.env.template`` to ``.env`` (fillout the missing data)
 > ``npm start``
