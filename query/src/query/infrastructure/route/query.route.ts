@@ -3,7 +3,7 @@ import { DynamoRepository } from '../repository/dynamo.repository';
 import { MockRepository } from '../repository/mock.repository';
 import { QueryController } from '../controller/query.ctrl';
 import { GetUseCase } from '../../application/getUseCase';
-import { UpdateUseCase } from '../../application/updateUseCase';
+//import { UpdateUseCase } from '../../application/updateUseCase';
 import { body, check } from 'express-validator';
 import { validateRequest } from '../middlewares/validate-request';
 
@@ -12,13 +12,16 @@ const route = Router();
 const redeemRepo = new DynamoRepository(); //to use db dynamoDB
 //const redeemRepo = new MockRepository(); //to use mock dynamoDB
 
-const updateUseCase = new UpdateUseCase(redeemRepo);
+//const updateUseCase = new UpdateUseCase(redeemRepo);
 
 const getUseCase = new GetUseCase(redeemRepo);
 
-const queryCtrl = new QueryController(updateUseCase, getUseCase);
+const queryCtrl = new QueryController(
+  //updateUseCase,
+  getUseCase
+);
 
-route.post(
+/*route.post(
   `/events`,
   [
     body('type').isString().withMessage('name must be String'),
@@ -32,7 +35,7 @@ route.post(
   ],
   validateRequest,
   queryCtrl.updateEventBusPoints
-);
+);*/
 
 route.get(
   `/api/query/getbyid/:documentCc`,
@@ -42,7 +45,7 @@ route.get(
 );
 
 /** End Points to Sync communication between service  * (just for develop objectives) */
-route.put(
+/*route.put(
   `/api/query/add`,
   [
     body('id').isUUID().withMessage('id must be UUID'),
@@ -52,10 +55,10 @@ route.put(
   ],
   validateRequest,
   queryCtrl.addPoints
-);
+);*/
 
 /** End Points to Sync communication between service  * (just for develop objectives) */
-route.put(
+/*route.put(
   `/api/query/redeem`,
   [
     body('id').isUUID().withMessage('id must be UUID'),
@@ -65,6 +68,6 @@ route.put(
   ],
   validateRequest,
   queryCtrl.redeemPoints
-);
+);*/
 
 export default route;

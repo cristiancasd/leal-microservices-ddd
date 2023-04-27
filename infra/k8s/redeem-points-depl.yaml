@@ -32,6 +32,8 @@ spec:
               value: 'us-east-1'
             - name: API_URL_SRV_EVENT
               value: 'http://event-bus-srv:8070/events'
+            - name: BROKER_SERVICE_NAME
+              value: 'broker-srv:9092'   
 ---
 apiVersion: v1
 kind: Service

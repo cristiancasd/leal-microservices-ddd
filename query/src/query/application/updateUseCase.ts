@@ -1,6 +1,7 @@
 import { BadRequestError } from '../domain/errors/bad-request-error';
+import { DataBaseError } from '../domain/errors/database-error';
+import { NotFoundDbError } from '../domain/errors/not-fount-db-error';
 import { QueryRepository } from '../domain/query.repository';
-import { QueryValue } from '../domain/query.value';
 
 interface scoreInput {
   id: string;
@@ -16,27 +17,29 @@ export class UpdateUseCase {
   }
 
   public addPoints = async (input: scoreInput) => {
-    let inputValue = new QueryValue(input);
-    const query = await this._queryRepository.getScoreById(
-      inputValue.documentCc
-    );
-    if (query) {
-      inputValue.score = +inputValue.score + +query.score;
+    const query = await this._queryRepository.getScoreById(input.documentCc);
+    if (!query) throw new DataBaseError();
+
+    if (typeof query !== 'string') {
+      input.score = +input.score + +query.score;
     }
 
-    const scoreCreated = await this._queryRepository.updatePoints(inputValue);
+    const scoreCreated = await this._queryRepository.updatePoints(input);
+    if (!scoreCreated) throw new DataBaseError();
     return scoreCreated;
   };
 
   public redeemPoints = async (input: scoreInput) => {
-    let inputValue = new QueryValue(input);
-    const query = await this._queryRepository.getScoreById(
-      inputValue.documentCc
-    );
+    const query = await this._queryRepository.getScoreById(input.documentCc);
 
-    if (query && +query.score >= inputValue.score) {
-      inputValue.score = +query.score - inputValue.score;
-      const scoreCreated = await this._queryRepository.updatePoints(inputValue);
+    if (!query) throw new DataBaseError();
+    if (typeof query === 'string') throw new NotFoundDbError(query);
+
+    if (+query.score >= +input.score) {
+      input.score = +query.score - +input.score;
+      const scoreCreated = await this._queryRepository.updatePoints(input);
+      if (!scoreCreated) throw new DataBaseError();
+
       return scoreCreated;
     } else {
       throw new BadRequestError('sorry, you dont have enough points');

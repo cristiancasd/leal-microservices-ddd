@@ -45,12 +45,4 @@ build:
           - src: 'src/**/*.ts'
             dest: .
 
-    - image: cristiancasd/leal-event-bus
-      context: event-bus
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "*.js"
-            dest: .
   

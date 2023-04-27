@@ -5,57 +5,60 @@ import { DynamoDB } from '../db/dynamo-db';
 export class DynamoRepository implements QueryRepository {
   private readonly _db = DynamoDB.getInstance();
 
-  async updatePoints(query: QueryEntity): Promise<QueryEntity> {
-    await this._db
-      .putItem({
-        TableName: DynamoDB.TABLE_NAME,
-        Item: {
-          documentCc: {
-            N: query.documentCc.toString()
-          },
+  async updatePoints(query: QueryEntity): Promise<QueryEntity | null> {
+    try {
+      await this._db
+        .putItem({
+          TableName: DynamoDB.TABLE_NAME,
+          Item: {
+            documentCc: {
+              N: query.documentCc.toString()
+            },
 
-          id: {
-            S: query.id
-          },
+            id: {
+              S: query.id
+            },
 
-          name: {
-            S: query.name
-          },
+            name: {
+              S: query.name
+            },
 
-          score: {
-            N: query.score.toString()
+            score: {
+              N: query.score.toString()
+            }
           }
-        }
-      })
-      .promise();
-
-    return query;
+        })
+        .promise();
+      return query;
+    } catch (err) {
+      return null;
+    }
   }
 
-  async getScoreById(documentCc: number): Promise<any | null> {
-    //console.log('buscando ...', id);
-    const response = await this._db
-      .getItem({
-        TableName: DynamoDB.TABLE_NAME,
-        Key: {
-          documentCc: { N: documentCc.toString() }
-        }
-        // ProjectionExpression: 'documentCc'
-      })
-      .promise();
+  async getScoreById(documentCc: number): Promise<QueryEntity | null | string> {
+    try {
+      const response = await this._db
+        .getItem({
+          TableName: DynamoDB.TABLE_NAME,
+          Key: {
+            documentCc: { N: documentCc.toString() }
+          }
+          // ProjectionExpression: 'documentCc'
+        })
+        .promise();
+      const item = response.Item;
+      if (!item) return 'Dont exist user, try with other ID';
 
-    //console.log('response ', response);
-    const item = response.Item;
-
-    if (item === undefined) return null;
-
-    return {
-      documentCc: item.documentCc.N,
-      score: item.score.N,
-      name: item.name.S,
-      id: item.id.S
-    };
-
-    return item;
+      return item.name.S && item.id.S && item.documentCc.N && item.score.N
+        ? {
+            documentCc: +item.documentCc.N,
+            score: +item.score.N,
+            name: item.name.S,
+            id: item.id.S
+          }
+        : null;
+    } catch (err) {
+      return null;
+    }
   }
 }

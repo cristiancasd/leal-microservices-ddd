@@ -2,7 +2,7 @@ import { Avatar, Box, Divider, IconButton, Menu, MenuItem, Tooltip, Typography }
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../store/auth/thunks';
-import { onResetPoints } from '../store/points/pointsSlice';
+import { onResetScoreData } from '../store/points/pointsSlice';
 import { SelectColorTheme } from './SelectColorTheme';
 
 export const UserMenu = () => {
@@ -22,7 +22,7 @@ export const UserMenu = () => {
 
   const logout = () => {
     dispatch(startLogout());
-    dispatch(onResetPoints());
+    dispatch(onResetScoreData());
 
     setAnchorElUser(null);
   };

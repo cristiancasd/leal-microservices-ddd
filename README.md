@@ -1,21 +1,23 @@
 
-
 # Leal APP
 
-Architecture: DDD
-Services: 
--- (add-points | redeem-points | query): Typescript
--- Event-bus: JavaScrip
+#### Architecture: DDD
+#### Services: 
+- (add-points | redeem-points | query): Typescript
+- Broker: Kafka
 
-- Handler error implemented
-- github actions: workflows implemented to have a main branch secure
+#### Others
+- Handler error implemented (customs error)
+- github actions: workflows implemented to do the merge before merging branches
 - prettier: To have good practices
 - Infra |sakaffold ingress-nginx implemented (easy development and deployment)
 - Testing: Jest
 - Front: Using hooks and redux(easy scalable code)
 
 <img src="/images-doc/architectureImg.jpg" alt="Architecture" >
-<img src="/images-doc/servicesImg.jpg" alt="Services" >
+<img src="/images-doc/routesServicesImg.jpg" alt="Routes Services" >
+<img src="/images-doc/brokerServicesImg.jpg" alt="Broker Services" >
+
 <img src="/images-doc/tablesDbImg.jpg" alt="Data Base">
 <img src="/images-doc/frontImg.jpg" alt="Front React App">
 
@@ -31,35 +33,15 @@ Services:
 	- Create a Dynamo table named leal-add-points-testing with partition key  (id:string)
 	- Create a Dynamo table named leal-redeem-points-testing with partition key  (id:string)
 
-## Use App in kubernetes (Docker-deskpot)
-
-1. define you env variables
-```
-kubectl create secret generic aws-id-secret --from-literal=AWS_ACCESS_KEY_ID=<your data>
-kubectl create secret generic aws-key-secret --from-literal=AWS_SECRET_ACCESS_KEY=<your data>
-```
-
-2. If you dont have ingress-ngix
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
-```
-3. Define in your hosts file
-```
-127.0.0.1 myleal.com
-```
-
-4. In the root of the project
-```sakffold dev```
-
-5. In your browseropen : http://myleal.com
-
-6. default users to use (loging CC)
-	- 1234
-	- 4444
-
 
 
 ## To test
+
+#### lift the kafka service in a docker container
+```
+docker-compose up -d
+```
+#### Run the tests
 ```
 cd add-points
 npm install
@@ -75,6 +57,11 @@ cd query
 npm install
 npm test
 ```
+```
+cd client
+yarn install
+yarn test
+```
 
 ## To use locally
 
@@ -86,18 +73,12 @@ npm test
 > change the ``.env.template`` to ``.env`` (fillout the missing data)
 > ``npm start``
 
-
 cd redeem-points
 > ``npm install``
 > change the ``.env.template`` to ``.env`` (fillout the missing data)
 > ``npm start``
 
 cd query
-> ``npm install``
-> change the ``.env.template`` to ``.env`` (fillout the missing data)
-> ``npm start``
-
-cd event-bus
 > ``npm install``
 > change the ``.env.template`` to ``.env`` (fillout the missing data)
 > ``npm start``

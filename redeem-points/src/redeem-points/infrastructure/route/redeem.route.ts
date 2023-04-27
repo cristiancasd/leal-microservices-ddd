@@ -1,19 +1,25 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
+import { RedeemBrokerUserCase } from '../../application/redeemBrokerUseCase';
 
 import { RedeemUseCase } from '../../application/redeemUseCase';
-import { RedeemController } from '../controller/redeem.ctrl';
 import { validateRequest } from '../middlewares/validate-request';
 import { DynamoRepository } from '../repository/dynamo.repository';
-import { MockRepository } from '../repository/mock.repository';
+import { KafkaRespository } from '../repository/kafka.repository';
+import { MockRepository } from '../repository/mockDb.repository';
+import { RedeemController } from '../controller/redeem.ctrl';
 
 const route = Router();
 
-const redeemRepo = new DynamoRepository(); //To use db dynamo
 //const addRepo = new MockRepository()      //To use db mock
+const redeemRepo = new DynamoRepository(); //To use db dynamo
+
+const addBroker = new KafkaRespository(); // To use Kafka as broker
 
 const redeemUseCase = new RedeemUseCase(redeemRepo);
-const redeemCtrl = new RedeemController(redeemUseCase);
+const redeemBrokerUseCase = new RedeemBrokerUserCase(addBroker);
+
+const redeemCtrl = new RedeemController(redeemUseCase, redeemBrokerUseCase);
 
 route.post(
   `/api/redeem/create`,
@@ -27,10 +33,5 @@ route.post(
   validateRequest,
   redeemCtrl.insertCtrl
 );
-
-route.post('/events', (req, res) => {
-  console.log('Received Event', req.body.type);
-  res.send({});
-});
 
 export default route;
